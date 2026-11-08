@@ -7,9 +7,9 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
 ## 1. Cos'è il Progetto
 **Sigari Track (v2)** è una piattaforma web responsive (ottimizzata anche per smartphone e tablet) e containerizzata con Docker per:
 1. **Monitorare i prezzi ufficiali dei sigari in Italia** pubblicati dalla Federazione Italiana Tabaccai (FIT) per conto di ADM (Agenzia delle Dogane e dei Monopoli), con rilevazione delle variazioni negli ultimi 180 giorni e grafico storico fino a 5 anni.
-2. **Gestire l'inventario personale dei sigari (Humidor)**: lotti, quantità residue, prezzo d'acquisto, date e negozi/tabaccherie di provenienza.
+2. **Gestire l'inventario personale dei sigari (Humidor)**: lotti, quantità residue, prezzo d'acquisto (con possibilità di modifica e correzione rapida degli importi inseriti per errore), date e negozi/tabaccherie di provenienza.
 3. **Supervisionare il microclima dei contenitori**: monitoraggio temperatura (°C) e umidità (% UR) per location distinte (*Humidor in Cedro*, *Giara Vetro Toscani*, *Tupperdor d'Invecchiamento*, ecc.), predisposto per l'integrazione IoT con **Home Assistant**.
-4. **Tenere un diario delle degustazioni (Fumate)**: orari di inizio/fine con calcolo automatico della durata, conteggio riaccensioni, abbinamenti e note personali.
+4. **Tenere un diario delle degustazioni (Fumate)**: orari di inizio/fine con calcolo automatico della durata, conteggio riaccensioni, abbinamenti e note personali, con possibilità sia di **modifica completa** che di annullamento (con reintegro automatico della giacenza).
 5. **Redigere schede sensoriali**: valutazione a stelle, ruota degli aromi (*cedro, cuoio, pepe, cacao, caffè, terra, ecc.*), forza, combustione e tiraggio, con sintesi AI delle opinioni dei club italiani di fumo lento (*GustoTabacco*, *Accademia del Fumo Lento*, *Bottega del Fumatore*).
 6. **Pianificare acquisti con Wishlist e Preferiti**: calcolo automatico della spesa preventivata e tag personalizzati.
 7. **Consultare una Guida & Enciclopedia**: anatomia del sigaro in 7 punti, foglie della tripa (*Volado*, *Seco*, *Ligero*), scala colori della capa e vitolario.
@@ -96,7 +96,8 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
         ├── WikiTab.tsx       # Enciclopedia visiva (anatomia interattiva, colori, vitolas)
         ├── SettingsTab.tsx   # Impostazioni: location (Humidor/Giara/Vetro), HA API key, backup
         └── modals/
-            ├── FumataModal.tsx       # Modale registrazione fumata con ora inizio/fine e stelle
+            ├── FumataModal.tsx       # Modale registrazione e modifica fumata con orari, riaccensioni e stelle
+            ├── EditHumidorItemModal.tsx # Modale modifica lotti humidor (prezzo acquisto, quantità, location, negozio)
             ├── PurchaseModal.tsx     # Modale nuovo acquisto con prezzi di listino e location
             ├── PriceHistoryModal.tsx # Modale storico prezzi a 5 anni con curva grafica SVG
             └── AIReviewModal.tsx     # Modale sintesi recensioni della community italiana

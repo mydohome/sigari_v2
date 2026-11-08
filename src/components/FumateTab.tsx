@@ -1,16 +1,18 @@
 import React from "react";
 import { Fumata } from "../types/cigar";
-import { Flame, Clock, Calendar, Undo2, Wine, Star, Plus } from "lucide-react";
+import { Flame, Clock, Calendar, Undo2, Wine, Star, Plus, Edit3 } from "lucide-react";
 
 interface FumateTabProps {
   fumate: Fumata[];
   onOpenFumataModal: () => void;
+  onOpenEditFumata: (fumata: Fumata) => void;
   onDeleteFumata: (id: number) => void;
 }
 
 export const FumateTab: React.FC<FumateTabProps> = ({
   fumate,
   onOpenFumataModal,
+  onOpenEditFumata,
   onDeleteFumata,
 }) => {
   const formatDurata = (minuti?: number | null) => {
@@ -168,14 +170,25 @@ export const FumateTab: React.FC<FumateTabProps> = ({
                       </div>
                     )}
 
-                    <button
-                      onClick={() => onDeleteFumata(f.id)}
-                      className="text-xs text-[#7d6f66] hover:text-rose-400 flex items-center gap-1 transition-colors px-2 py-1 rounded hover:bg-[#201714]"
-                      title="Annulla registrazione e ripristina la scorta in humidor"
-                    >
-                      <Undo2 className="w-3.5 h-3.5" />
-                      <span>Annulla fumata</span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => onOpenEditFumata(f)}
+                        className="text-xs text-[#a3948b] hover:text-[#c99757] flex items-center gap-1 transition-colors px-2 py-1 rounded hover:bg-[#201714] border border-[#2f241f]"
+                        title="Modifica dettagli fumata (orario, note, stelle, abbinamento)"
+                      >
+                        <Edit3 className="w-3.5 h-3.5" />
+                        <span>Modifica</span>
+                      </button>
+
+                      <button
+                        onClick={() => onDeleteFumata(f.id)}
+                        className="text-xs text-[#7d6f66] hover:text-rose-400 flex items-center gap-1 transition-colors px-2 py-1 rounded hover:bg-[#201714]"
+                        title="Annulla registrazione e ripristina la scorta in humidor"
+                      >
+                        <Undo2 className="w-3.5 h-3.5" />
+                        <span>Annulla</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

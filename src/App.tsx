@@ -13,6 +13,7 @@ import { FumataModal } from "./components/modals/FumataModal";
 import { PurchaseModal } from "./components/modals/PurchaseModal";
 import { PriceHistoryModal } from "./components/modals/PriceHistoryModal";
 import { AIReviewModal } from "./components/modals/AIReviewModal";
+import { EditHumidorItemModal } from "./components/modals/EditHumidorItemModal";
 import {
   Product,
   HumidorItem,
@@ -47,12 +48,15 @@ export default function App() {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
   const [isAIReviewModalOpen, setIsAIReviewModalOpen] = useState(false);
+  const [isEditItemModalOpen, setIsEditItemModalOpen] = useState(false);
 
   const [selectedProductForHistory, setSelectedProductForHistory] = useState<Product | null>(null);
   const [productHistoryPoints, setProductHistoryPoints] = useState<PriceHistoryPoint[]>([]);
   const [selectedProductForAIReview, setSelectedProductForAIReview] = useState<Product | null>(null);
   const [preSelectedProductForPurchase, setPreSelectedProductForPurchase] = useState<Product | null>(null);
   const [preSelectedItemForFumata, setPreSelectedItemForFumata] = useState<HumidorItem | null>(null);
+  const [editingHumidorItem, setEditingHumidorItem] = useState<HumidorItem | null>(null);
+  const [editingFumata, setEditingFumata] = useState<Fumata | null>(null);
 
   // Notification toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -125,6 +129,22 @@ export default function App() {
     }
   };
 
+  const handleUpdateFumata = async (id: number, data: any) => {
+    try {
+      const res = await fetch(`/api/humidor/fumate/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        showToast("Fumata modificata con successo!");
+        await loadData();
+      }
+    } catch (err) {
+      console.error("Errore modifica fumata:", err);
+    }
+  };
+
   // Gestione Acquisto / Inserimento Humidor
   const handlePurchaseSubmit = async (data: any) => {
     try {
@@ -152,6 +172,22 @@ export default function App() {
       }
     } catch (err) {
       console.error("Errore cancellazione:", err);
+    }
+  };
+
+  const handleUpdateHumidorItem = async (id: number, data: any) => {
+    try {
+      const res = await fetch(`/api/humidor/items/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        showToast("Sigaro in humidor aggiornato con successo!");
+        await loadData();
+      }
+    } catch (err) {
+      console.error("Errore aggiornamento sigaro humidor:", err);
     }
   };
 
@@ -362,10 +398,15 @@ export default function App() {
             }}
             onOpenFumataForProduct={(item) => {
               setPreSelectedItemForFumata(item);
+              setEditingFumata(null);
               setIsFumataModalOpen(true);
             }}
             onOpenTastingNote={(productId) => {
               setActiveTab("degustazione");
+            }}
+            onOpenEditItem={(item) => {
+              setEditingHumidorItem(item);
+              setIsEditItemModalOpen(true);
             }}
             onDeleteItem={handleDeleteHumidorItem}
             onUpdateQuantity={handleUpdateItemQuantity}
@@ -393,7 +434,15 @@ export default function App() {
         {activeTab === "fumate" && (
           <FumateTab
             fumate={fumate}
-            onOpenFumataModal={() => setIsFumataModalOpen(true)}
+            onOpenFumataModal={() => {
+              setEditingFumata(null);
+              setPreSelectedItemForFumata(null);
+              setIsFumataModalOpen(true);
+            }}
+            onOpenEditFumata={(fum) => {
+              setEditingFumata(fum);
+              setIsFumataModalOpen(true);
+            }}
             onDeleteFumata={handleDeleteFumata}
           />
         )}
@@ -462,11 +511,26 @@ export default function App() {
         onClose={() => {
           setIsFumataModalOpen(false);
           setPreSelectedItemForFumata(null);
+          setEditingFumata(null);
         }}
         humidorItems={humidorItems}
         products={products}
         preSelectedItem={preSelectedItemForFumata}
+        editingFumata={editingFumata}
+        onUpdate={handleUpdateFumata}
         onSubmit={handleFumataSubmit}
+      />
+
+      <EditHumidorItemModal
+        isOpen={isEditItemModalOpen}
+        onClose={() => {
+          setIsEditItemModalOpen(false);
+          setEditingHumidorItem(null);
+        }}
+        item={editingHumidorItem}
+        locations={locations}
+        shops={shops}
+        onSubmit={handleUpdateHumidorItem}
       />
 
       <PurchaseModal

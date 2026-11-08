@@ -548,12 +548,38 @@ app.patch("/api/humidor/items/:id", (req: Request, res: Response) => {
   const idx = db.items.findIndex((i) => i.id === id);
   if (idx === -1) return res.status(404).json({ error: "Elemento non trovato" });
 
-  const { location_id, quantita_rimanente, note, prezzo_acquisto, data_acquisto } = req.body;
+  const { location_id, quantita_iniziale, quantita_rimanente, note, prezzo_acquisto, data_acquisto, shop_nome, shop_id } = req.body;
   if (location_id !== undefined) db.items[idx].location_id = location_id ? Number(location_id) : null;
+  if (quantita_iniziale !== undefined) db.items[idx].quantita_iniziale = Math.max(1, Number(quantita_iniziale));
   if (quantita_rimanente !== undefined) db.items[idx].quantita_rimanente = Math.max(0, Number(quantita_rimanente));
-  if (note !== undefined) db.items[idx].note = note;
+  if (note !== undefined) db.items[idx].note = note ? String(note).trim() : null;
   if (prezzo_acquisto !== undefined) db.items[idx].prezzo_acquisto = Number(prezzo_acquisto);
   if (data_acquisto !== undefined) db.items[idx].data_acquisto = String(data_acquisto);
+
+  if (shop_id !== undefined) {
+    db.items[idx].shop_id = shop_id ? Number(shop_id) : null;
+  }
+  if (shop_nome !== undefined) {
+    const trimmed = String(shop_nome || "").trim();
+    if (trimmed) {
+      const existing = db.shops.find((s) => s.nome.toLowerCase() === trimmed.toLowerCase());
+      if (existing) {
+        db.items[idx].shop_id = existing.id;
+        db.items[idx].shop_nome = existing.nome;
+      } else {
+        const newShop: HumidorShop = {
+          id: db.shops.length ? Math.max(...db.shops.map((s) => s.id)) + 1 : 1,
+          nome: trimmed,
+        };
+        db.shops.push(newShop);
+        db.items[idx].shop_id = newShop.id;
+        db.items[idx].shop_nome = newShop.nome;
+      }
+    } else {
+      db.items[idx].shop_id = null;
+      db.items[idx].shop_nome = null;
+    }
+  }
 
   saveDB(db);
   res.json({ item: enrichItem(db.items[idx]) });
@@ -709,6 +735,41 @@ app.post("/api/humidor/fumate", (req: Request, res: Response) => {
 
   saveDB(db);
   res.status(201).json({ fumata: enrichFumata(nuovaFumata) });
+});
+
+app.patch("/api/humidor/fumate/:id", (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const idx = db.fumate.findIndex((f) => f.id === id);
+  if (idx === -1) return res.status(404).json({ error: "Fumata non trovata" });
+
+  const { data_fumata, ora_inizio, ora_fine, riaccensioni, stelle, note, abbinamento, quantita } = req.body;
+
+  if (quantita !== undefined && db.fumate[idx].humidor_item_id) {
+    const diffQty = Number(quantita) - db.fumate[idx].quantita;
+    if (diffQty !== 0) {
+      const item = db.items.find((i) => i.id === db.fumate[idx].humidor_item_id);
+      if (item) {
+        item.quantita_rimanente = Math.max(0, item.quantita_rimanente - diffQty);
+      }
+    }
+    db.fumate[idx].quantita = Number(quantita);
+  }
+
+  if (data_fumata !== undefined) db.fumate[idx].data_fumata = String(data_fumata);
+  if (ora_inizio !== undefined) db.fumate[idx].ora_inizio = ora_inizio ? String(ora_inizio) : null;
+  if (ora_fine !== undefined) db.fumate[idx].ora_fine = ora_fine ? String(ora_fine) : null;
+
+  if (ora_inizio !== undefined || ora_fine !== undefined) {
+    db.fumate[idx].durata_minuti = calcolaDurata(db.fumate[idx].ora_inizio, db.fumate[idx].ora_fine);
+  }
+
+  if (riaccensioni !== undefined) db.fumate[idx].riaccensioni = Number(riaccensioni);
+  if (stelle !== undefined) db.fumate[idx].stelle = stelle ? Number(stelle) : null;
+  if (note !== undefined) db.fumate[idx].note = note ? String(note).trim() : null;
+  if (abbinamento !== undefined) db.fumate[idx].abbinamento = abbinamento ? String(abbinamento).trim() : null;
+
+  saveDB(db);
+  res.json({ fumata: enrichFumata(db.fumate[idx]) });
 });
 
 app.delete("/api/humidor/fumate/:id", (req: Request, res: Response) => {

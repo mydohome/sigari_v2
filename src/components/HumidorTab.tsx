@@ -8,6 +8,7 @@ interface HumidorTabProps {
   onOpenPurchaseModal: () => void;
   onOpenFumataForProduct: (item: HumidorItem) => void;
   onOpenTastingNote: (productId: number) => void;
+  onOpenEditItem: (item: HumidorItem) => void;
   onDeleteItem: (id: number) => void;
   onUpdateQuantity: (id: number, remaining: number) => void;
   onMoveLocation: (id: number, newLocationId: number) => void;
@@ -19,6 +20,7 @@ export const HumidorTab: React.FC<HumidorTabProps> = ({
   onOpenPurchaseModal,
   onOpenFumataForProduct,
   onOpenTastingNote,
+  onOpenEditItem,
   onDeleteItem,
   onUpdateQuantity,
   onMoveLocation,
@@ -281,6 +283,14 @@ export const HumidorTab: React.FC<HumidorTabProps> = ({
                     title="Note di Degustazione"
                   >
                     <Sparkles className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    onClick={() => onOpenEditItem(item)}
+                    className="p-2 text-[#a3948b] hover:text-[#c99757] bg-[#1a1310] hover:bg-[#251c18] border border-[#2f241f] rounded-lg transition-colors"
+                    title="Modifica prezzo di acquisto, quantità o dettagli"
+                  >
+                    <Edit3 className="w-4 h-4" />
                   </button>
 
                   {/* Move location selector toggle */}

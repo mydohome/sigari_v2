@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Product, HumidorItem } from "../../types/cigar";
+import { Product, HumidorItem, Fumata } from "../../types/cigar";
 import { X, Flame, Clock, Calendar, Wine, Star } from "lucide-react";
 
 interface FumataModalProps {
@@ -9,6 +9,8 @@ interface FumataModalProps {
   products: Product[];
   preSelectedProduct?: Product | null;
   preSelectedItem?: HumidorItem | null;
+  editingFumata?: Fumata | null;
+  onUpdate?: (id: number, data: any) => void;
   onSubmit: (data: {
     humidor_item_id?: number;
     product_id: number;
@@ -30,6 +32,8 @@ export const FumataModal: React.FC<FumataModalProps> = ({
   products,
   preSelectedProduct,
   preSelectedItem,
+  editingFumata,
+  onUpdate,
   onSubmit,
 }) => {
   const [selectedItemId, setSelectedItemId] = useState<number | "catalog">(0);
@@ -43,20 +47,38 @@ export const FumataModal: React.FC<FumataModalProps> = ({
   const [abbinamento, setAbbinamento] = useState<string>("");
 
   useEffect(() => {
-    if (preSelectedItem) {
+    if (editingFumata) {
+      setSelectedItemId(editingFumata.humidor_item_id || "catalog");
+      setSelectedProductId(editingFumata.product_id);
+      setDataFumata(editingFumata.data_fumata || new Date().toISOString().split("T")[0]);
+      setOraInizio(editingFumata.ora_inizio || "20:30");
+      setOraFine(editingFumata.ora_fine || "21:45");
+      setRiaccensioni(editingFumata.riaccensioni || 0);
+      setStelle(editingFumata.stelle || 5);
+      setNote(editingFumata.note || "");
+      setAbbinamento(editingFumata.abbinamento || "");
+    } else if (preSelectedItem) {
       setSelectedItemId(preSelectedItem.id);
       setSelectedProductId(preSelectedItem.product_id);
+      setNote("");
+      setAbbinamento("");
     } else if (preSelectedProduct) {
       setSelectedItemId("catalog");
       setSelectedProductId(preSelectedProduct.id);
+      setNote("");
+      setAbbinamento("");
     } else if (humidorItems.length > 0) {
       setSelectedItemId(humidorItems[0].id);
       setSelectedProductId(humidorItems[0].product_id);
+      setNote("");
+      setAbbinamento("");
     } else if (products.length > 0) {
       setSelectedItemId("catalog");
       setSelectedProductId(products[0].id);
+      setNote("");
+      setAbbinamento("");
     }
-  }, [preSelectedItem, preSelectedProduct, humidorItems, products, isOpen]);
+  }, [editingFumata, preSelectedItem, preSelectedProduct, humidorItems, products, isOpen]);
 
   if (!isOpen) return null;
 
@@ -73,18 +95,30 @@ export const FumataModal: React.FC<FumataModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({
-      humidor_item_id: selectedItemId !== "catalog" ? Number(selectedItemId) : undefined,
-      product_id: selectedProductId,
-      quantita: 1,
-      data_fumata: dataFumata,
-      ora_inizio: oraInizio || undefined,
-      ora_fine: oraFine || undefined,
-      riaccensioni,
-      stelle,
-      note: note.trim() || undefined,
-      abbinamento: abbinamento.trim() || undefined,
-    });
+    if (editingFumata && onUpdate) {
+      onUpdate(editingFumata.id, {
+        data_fumata: dataFumata,
+        ora_inizio: oraInizio || undefined,
+        ora_fine: oraFine || undefined,
+        riaccensioni,
+        stelle,
+        note: note.trim() || undefined,
+        abbinamento: abbinamento.trim() || undefined,
+      });
+    } else {
+      onSubmit({
+        humidor_item_id: selectedItemId !== "catalog" ? Number(selectedItemId) : undefined,
+        product_id: selectedProductId,
+        quantita: 1,
+        data_fumata: dataFumata,
+        ora_inizio: oraInizio || undefined,
+        ora_fine: oraFine || undefined,
+        riaccensioni,
+        stelle,
+        note: note.trim() || undefined,
+        abbinamento: abbinamento.trim() || undefined,
+      });
+    }
     onClose();
   };
 
@@ -102,7 +136,7 @@ export const FumataModal: React.FC<FumataModalProps> = ({
           <div className="flex items-center gap-2">
             <Flame className="w-5 h-5 text-[#c99757]" />
             <h2 className="text-base font-bold text-[#faf3ea]">
-              Registra Nuova Fumata
+              {editingFumata ? "Modifica Fumata" : "Registra Nuova Fumata"}
             </h2>
           </div>
           <button
@@ -285,7 +319,7 @@ export const FumataModal: React.FC<FumataModalProps> = ({
               type="submit"
               className="px-5 py-2 text-xs font-semibold text-[#14100e] bg-gradient-to-r from-[#d9aa6b] to-[#b37d3e] rounded-xl shadow-md active:scale-95"
             >
-              Registra nel Diario
+              {editingFumata ? "Salva Modifiche" : "Registra nel Diario"}
             </button>
           </div>
         </form>
