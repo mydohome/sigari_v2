@@ -543,6 +543,80 @@ app.post("/api/humidor/items", (req: Request, res: Response) => {
   res.status(201).json({ item: enrichItem(newItem) });
 });
 
+app.post("/api/humidor/items/bulk", (req: Request, res: Response) => {
+  const { items } = req.body;
+  if (!Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ error: "Nessun elemento da importare" });
+  }
+
+  const addedItems: HumidorItem[] = [];
+  let currentMaxId = db.items.length ? Math.max(...db.items.map((i) => i.id)) : 0;
+  let currentShopMaxId = db.shops.length ? Math.max(...db.shops.map((s) => s.id)) : 0;
+
+  for (const raw of items) {
+    let productId = raw.product_id ? Number(raw.product_id) : null;
+    if (!productId && raw.marca) {
+      const q = String(raw.marca).trim().toLowerCase();
+      const match = db.products.find(
+        (p) => p.marca.toLowerCase() === q || p.marca.toLowerCase().includes(q)
+      );
+      if (match) productId = match.id;
+    }
+    if (!productId && db.products.length > 0) {
+      productId = db.products[0].id;
+    }
+
+    let locationId = raw.location_id ? Number(raw.location_id) : null;
+    if (!locationId && raw.location_nome) {
+      const lq = String(raw.location_nome).trim().toLowerCase();
+      const matchLoc = db.locations.find((l) => l.nome.toLowerCase() === lq || l.nome.toLowerCase().includes(lq));
+      if (matchLoc) locationId = matchLoc.id;
+    }
+    if (!locationId && db.locations.length > 0) {
+      locationId = db.locations[0].id;
+    }
+
+    let shopId = raw.shop_id ? Number(raw.shop_id) : null;
+    const shopNome = raw.shop_nome ? String(raw.shop_nome).trim() : null;
+    if (shopNome) {
+      const exist = db.shops.find((s) => s.nome.toLowerCase() === shopNome.toLowerCase());
+      if (exist) {
+        shopId = exist.id;
+      } else {
+        currentShopMaxId++;
+        const newShop: HumidorShop = { id: currentShopMaxId, nome: shopNome };
+        db.shops.push(newShop);
+        shopId = newShop.id;
+      }
+    }
+
+    const prod = db.products.find((p) => p.id === productId);
+    const prezzoAcquisto = raw.prezzo_acquisto !== undefined ? Number(raw.prezzo_acquisto) : (prod?.prezzo_singolo || 10);
+    const quantita = Math.max(1, Number(raw.quantita || raw.quantita_iniziale || raw.quantita_rimanente || 1));
+    const dataAcquisto = raw.data_acquisto || new Date().toISOString().split("T")[0];
+
+    currentMaxId++;
+    const newItem: HumidorItem = {
+      id: currentMaxId,
+      product_id: productId || 1,
+      location_id: locationId,
+      shop_id: shopId,
+      prezzo_acquisto: Number(prezzoAcquisto),
+      data_acquisto: String(dataAcquisto),
+      quantita_iniziale: quantita,
+      quantita_rimanente: quantita,
+      note: raw.note ? String(raw.note).trim() : null,
+      created_at: new Date().toISOString(),
+    };
+
+    db.items.unshift(newItem);
+    addedItems.push(newItem);
+  }
+
+  saveDB(db);
+  res.status(201).json({ success: true, count: addedItems.length, items: addedItems.map(enrichItem) });
+});
+
 app.patch("/api/humidor/items/:id", (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const idx = db.items.findIndex((i) => i.id === id);

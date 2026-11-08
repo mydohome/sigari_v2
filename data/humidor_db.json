@@ -697,6 +697,18 @@
   ],
   "items": [
     {
+      "id": 6,
+      "product_id": 7,
+      "location_id": 1,
+      "shop_id": null,
+      "prezzo_acquisto": 14.5,
+      "data_acquisto": "2026-11-08",
+      "quantita_iniziale": 2,
+      "quantita_rimanente": 2,
+      "note": null,
+      "created_at": "2026-11-08T19:47:28.121Z"
+    },
+    {
       "id": 1,
       "product_id": 1,
       "shop_id": 1,
@@ -951,5 +963,10 @@
       "created_at": "2026-11-02T15:20:00.000Z"
     }
   ],
-  "last_scrape": "2026-11-08T13:47:06.666Z"
+  "last_scrape": "2026-11-08T13:47:06.666Z",
+  "config": {
+    "ha_api_key": "",
+    "admin_token": "sigari_admin_token_2026"
+  },
+  "users": []
 }

@@ -40,12 +40,14 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
    - Docker Compose interpreta il simbolo `$` come riferimento a una variabile d'ambiente, sostituendolo silenziosamente con una stringa vuota e causando errori di autenticazione inspiegabili.
    - **Regola inderogabile**: generare sempre password e token con `openssl rand -hex 24` (produce esclusivamente caratteri alfanumerici esadecimali sicuri).
 
-3. **Separazione Web vs Console Server**:
+3. **Sezione Impostazioni Modulare & Import/Export Excel**:
+   - Organizzata in un **Hub pulito e ordinato con 5 box cliccabili** e **tasto Back** per tornare rapidamente al menu principale senza scrolling chilometrici:
+     1. **Location & Microclima**: configurazione contenitori fisici (*Humidor, Giara, Vetro, Tupperdor*) con campioni colore e telemetria °C / % UR.
+     2. **Importazione / Esportazione Excel**: esportazione completa in formato **Excel nativo (.xlsx)** e **CSV** di inventario humidor, diario delle fumate e listino FIT ufficiale; importazione massiva con anteprima tabellare interattiva, template pronto all'uso e API batch atomica (`/api/humidor/items/bulk`).
+     3. **Home Assistant & Webhooks**: inserimento e salvataggio della chiave segreta `HA_API_KEY`, visualizzazione documentazione YAML e test interattivo delle chiamate webhook.
+     4. **Backup Manuale & Snapshot**: esecuzione del backup manuale immediato con download del file `.json` e storico dei ripristini protetti da snapshot preventivo.
+     5. **Console Server CLI**: promemoria comandi e documentazione stack.
    - I comandi di gestione e manutenzione del server (`sigari update`, `sigari backup`, `sigari restore`, `sigari scrape`, `sigari status`) si eseguono **esclusivamente da console terminale SSH** con `./cli/sigari <comando>`.
-   - Sul Web è presente la scheda dedicata **"Impostazioni"** per:
-     - Configurazione/creazione delle location (*Humidor, Giara, Vetro* con campioni colore).
-     - Inserimento e salvataggio della chiave segreta per Home Assistant (`HA_API_KEY`) con simulatore test.
-     - Esecuzione del **backup manuale immediato** con download del file `.json` e storico dei ripristini.
 
 4. **Script di Setup Automatico (`setup.sh`)**:
    - Eseguibile con `./setup.sh` subito dopo `git clone`.

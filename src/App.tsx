@@ -480,6 +480,8 @@ export default function App() {
           <SettingsTab
             locations={locations}
             items={humidorItems}
+            products={products}
+            fumate={fumate}
             backups={backups}
             onRefreshData={loadData}
             onRefreshBackups={loadData}
