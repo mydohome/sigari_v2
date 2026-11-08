@@ -70,7 +70,7 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
 ├── .npmrc                    # Configurazione npm (legacy-peer-deps per build stabili)
 ├── package.json              # Script di avvio e dipendenze
 ├── package-lock.json         # Lockfile deterministico per npm ci in Docker
-├── Dockerfile                # Dockerfile multi-stage per produzione Node 22
+├── Dockerfile                # Dockerfile multi-stage per produzione Node 22 (node:22-slim Debian glibc)
 ├── docker-compose.yml        # Stack con servizi db (Postgres 16) e backend, con healthcheck
 ├── README.md                 # Documentazione d'uso e installazione rapida
 ├── HANDOVER.md               # Questo documento di contesto per handover tra chat
