@@ -67,6 +67,9 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
 ```
 ├── .env.example              # Template variabili d'ambiente con avvisi di sicurezza
 ├── .gitignore                # Regole git (esclude node_modules, dist, .env*, downloads/)
+├── .npmrc                    # Configurazione npm (legacy-peer-deps per build stabili)
+├── package.json              # Script di avvio e dipendenze
+├── package-lock.json         # Lockfile deterministico per npm ci in Docker
 ├── Dockerfile                # Dockerfile multi-stage per produzione Node 22
 ├── docker-compose.yml        # Stack con servizi db (Postgres 16) e backend, con healthcheck
 ├── README.md                 # Documentazione d'uso e installazione rapida

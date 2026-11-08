@@ -2,8 +2,8 @@
 FROM node:22-alpine AS builder
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package*.json .npmrc* ./
+RUN if [ -f package-lock.json ]; then npm ci --legacy-peer-deps || npm install --legacy-peer-deps; else npm install --legacy-peer-deps; fi
 
 COPY . .
 RUN npm run build
@@ -14,16 +14,19 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY package*.json .npmrc* ./
+RUN if [ -f package-lock.json ]; then npm ci --omit=dev --legacy-peer-deps || npm install --omit=dev --legacy-peer-deps; else npm install --omit=dev --legacy-peer-deps; fi
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server.ts ./server.ts
 COPY --from=builder /app/src ./src
+COPY --from=builder /app/data ./data
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 COPY --from=builder /app/metadata.json ./metadata.json
 
-# Installa tsx globalmente o come runtime per eseguire server.ts in Node
+RUN mkdir -p /app/downloads/backups /app/data
+
+# Installa tsx per eseguire server.ts con TypeScript in Node
 RUN npm install -g tsx
 
 EXPOSE 3000
