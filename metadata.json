@@ -1,0 +1,6 @@
+{
+  "name": "Sigari Track",
+  "description": "App per tracciare la collezione di sigari posseduti, monitorare i prezzi ufficiali FIT/ADM, registrare le fumate e note di degustazione, con dashboard statistica e comandi server docker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

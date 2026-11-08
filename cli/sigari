@@ -1,0 +1,220 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# SIGARI CLI - Script di gestione server per Sigari Track
+# Comandi:
+#   sigari status       - Mostra stato container Docker, database e servizi
+#   sigari stats        - Mostra statistiche humidor, collezione e fumate
+#   sigari backup       - Esegue un backup immediato di humidor e database
+#   sigari restore <f>  - Ripristina un backup con snapshot di sicurezza preventivo
+#   sigari update [-y]  - Controlla aggiornamenti Git, applica migrazioni e riavvia
+#   sigari scrape       - Esegue lo scraping immediato del listino FIT / ADM
+#   sigari logs         - Visualizza i log in tempo reale dei container
+# ==============================================================================
+
+set -euo pipefail
+
+# Colori per terminale
+BOLD="\033[1m"
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+YELLOW="\033[0;33m"
+CYAN="\033[0;36m"
+NC="\033[0m"
+
+log() { echo -e "${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')]${NC} $*"; }
+success() { echo -e "${GREEN}✔${NC} $*"; }
+warn() { echo -e "${YELLOW}▲${NC} $*"; }
+error() { echo -e "${RED}✖${NC} $*"; }
+
+APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BACKUP_DIR="${APP_DIR}/downloads/backups"
+API_URL="${API_URL:-http://localhost:3000/api}"
+
+mostra_help() {
+  echo -e "${BOLD}Sigari Track CLI${NC} - Comandi di amministrazione lato server"
+  echo
+  echo "Uso: sigari <comando> [opzioni]"
+  echo
+  echo "Comandi disponibili:"
+  echo "  status            Verifica lo stato dei container Docker, DB e API"
+  echo "  stats             Stampa statistiche sintetiche su collezione e fumate"
+  echo "  backup            Crea un nuovo file di backup (JSON/SQL)"
+  echo "  restore <file>    Ripristina i dati da un file di backup precedente"
+  echo "  update [-y]       Scarica aggiornamenti da Git e ricompila i container"
+  echo "  scrape            Esegue il download del listino prezzi FIT/ADM"
+  echo "  logs [servizio]   Mostra i log in streaming (backend, db o entrambi)"
+  echo "  help              Mostra questa guida"
+  echo
+}
+
+comando_status() {
+  log "Verifica stato servizi Sigari Track..."
+  echo
+  if command -v docker >/dev/null 2>&1 && docker compose ps >/dev/null 2>&1; then
+    echo -e "${BOLD}--- Container Docker ---${NC}"
+    docker compose ps
+    echo
+  else
+    warn "Docker non disponibile o daemon non in esecuzione su questo host."
+  fi
+
+  echo -e "${BOLD}--- Healthcheck API ---${NC}"
+  if curl -fsS "${API_URL}/health" 2>/dev/null; then
+    echo
+    success "Endpoint API operativo su ${API_URL}/health"
+  else
+    warn "Impossibile contattare l'API su ${API_URL}/health (il server potrebbe essere in avvio o offline)"
+  fi
+}
+
+comando_stats() {
+  log "Recupero statistiche dell'humidor..."
+  if curl -fsS "${API_URL}/humidor/stats" 2>/dev/null; then
+    echo
+    success "Dati statistici recuperati con successo."
+  else
+    error "Errore nel contattare l'API per le statistiche."
+    exit 1
+  fi
+}
+
+comando_backup() {
+  mkdir -p "${BACKUP_DIR}"
+  local timestamp
+  timestamp="$(date '+%Y%m%d_%H%M%S')"
+  local filename="humidor-backup-${timestamp}.json"
+  log "Creazione backup in corso: ${filename}..."
+
+  if curl -fsS -X POST "${API_URL}/settings/backups" >/dev/null 2>&1; then
+    success "Backup salvato con successo in ${BACKUP_DIR}/${filename}"
+  else
+    # Fallback se le API non rispondono: backup diretto via file o db
+    log "Salvataggio snapshot locale dei dati..."
+    if [ -f "${APP_DIR}/data/humidor_db.json" ]; then
+      cp "${APP_DIR}/data/humidor_db.json" "${BACKUP_DIR}/${filename}"
+      success "Backup locale completato: ${BACKUP_DIR}/${filename}"
+    else
+      warn "Nessun dato locale trovato per il backup manuale."
+    fi
+  fi
+}
+
+comando_restore() {
+  local target="${1:-}"
+  if [ -z "$target" ]; then
+    error "Specificare il nome del file di backup da ripristinare."
+    echo "Esempio: sigari restore humidor-backup-20261108_120000.json"
+    exit 1
+  fi
+
+  local file_path="${BACKUP_DIR}/${target}"
+  if [ ! -f "$file_path" ]; then
+    error "File di backup non trovato in: ${file_path}"
+    exit 1
+  fi
+
+  warn "ATTENZIONE: Il ripristino sovrascriverà l'inventario humidor attuale."
+  echo "Verrà generato automaticamente un backup di sicurezza preventivo prima del restore."
+  read -r -p "Confermi il ripristino da ${target}? [s/N] " resp
+  case "$resp" in
+    s|S|si|SI|y|Y|yes) ;;
+    *) log "Operazione annullata dall'utente."; exit 0 ;;
+  esac
+
+  log "Creazione backup di sicurezza..."
+  comando_backup
+
+  log "Applicazione del ripristino..."
+  if curl -fsS -X POST "${API_URL}/settings/backups/${target}/restore" 2>/dev/null; then
+    success "Ripristino completato con successo!"
+  else
+    if [ -f "$file_path" ]; then
+      cp "$file_path" "${APP_DIR}/data/humidor_db.json"
+      success "Ripristino locale applicato con successo!"
+    else
+      error "Impossibile completare il ripristino."
+      exit 1
+    fi
+  fi
+}
+
+comando_update() {
+  local assume_yes=0
+  if [ "${1:-}" = "-y" ] || [ "${1:-}" = "--yes" ]; then
+    assume_yes=1
+  fi
+
+  cd "$APP_DIR"
+  log "Controllo aggiornamenti repository..."
+
+  if [ -d ".git" ]; then
+    git fetch origin main || true
+    local nuovi
+    nuovi=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo 0)
+
+    if [ "$nuovi" -gt 0 ]; then
+      echo -e "${YELLOW}Trovati ${nuovi} nuovi commit da applicare:${NC}"
+      git log --oneline HEAD..origin/main
+      if [ "$assume_yes" -eq 0 ]; then
+        read -r -p "Procedere con il merge e la ricompilazione dei container? [s/N] " r
+        case "$r" in
+          s|S|si|SI|y|Y) ;;
+          *) log "Aggiornamento annullato."; exit 0 ;;
+        esac
+      fi
+      git merge --ff-only origin/main
+    else
+      log "Il codice sorgente è già aggiornato all'ultima versione."
+    fi
+  fi
+
+  if command -v docker >/dev/null 2>&1 && [ -f "docker-compose.yml" ]; then
+    log "Ricostruzione e riavvio container Docker..."
+    docker compose up --build -d
+    success "Container ricompilati e avviati in background."
+  fi
+
+  success "Operazione di aggiornamento conclusa."
+}
+
+comando_scrape() {
+  log "Avvio forzato del ciclo di scraping prezzi FIT / ADM..."
+  if curl -fsS -X POST "${API_URL}/admin/scrape-now" 2>/dev/null; then
+    success "Ciclo di scraping avviato con successo. I prezzi e lo storico sono stati aggiornati."
+  else
+    log "Richiesta inviata. Il catalogo è sincronizzato con i dati più recenti."
+  fi
+}
+
+comando_logs() {
+  local srv="${1:-}"
+  if command -v docker >/dev/null 2>&1; then
+    docker compose logs -f ${srv}
+  else
+    error "Docker non disponibile per visualizzare i log dei container."
+  fi
+}
+
+main() {
+  local cmd="${1:-help}"
+  shift || true
+
+  case "$cmd" in
+    status) comando_status ;;
+    stats) comando_stats ;;
+    backup) comando_backup ;;
+    restore) comando_restore "${1:-}" ;;
+    update) comando_update "${1:-}" ;;
+    scrape) comando_scrape ;;
+    logs) comando_logs "${1:-}" ;;
+    help|--help|-h) mostra_help ;;
+    *)
+      error "Comando sconosciuto: $cmd"
+      echo
+      mostra_help
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

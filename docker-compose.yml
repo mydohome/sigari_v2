@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sigari-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tabacchi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tabacchi_secure_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-tabacchi_prezzi}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tabacchi}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sigari-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgres://${POSTGRES_USER:-tabacchi}:${POSTGRES_PASSWORD:-tabacchi_secure_pass}@db:5432/${POSTGRES_DB:-tabacchi_prezzi}
+      SCRAPE_CRON: ${SCRAPE_CRON:-0 3 * * 1}
+      SCRAPE_ON_BOOT: ${SCRAPE_ON_BOOT:-true}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-sigari_admin_token_2026}
+      JWT_SECRET: ${JWT_SECRET:-sigari_jwt_secret_hex32_token}
+      HA_API_KEY: ${HA_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    ports:
+      - "3000:3000"
+    volumes:
+      - sigari_downloads:/app/downloads
+
+volumes:
+  db_data:
+    name: sigari_db_data
+  sigari_downloads:
+    name: sigari_downloads_data
