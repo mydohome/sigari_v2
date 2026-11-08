@@ -57,6 +57,7 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
    - Genera tutte le chiavi crittografiche pulite (solo esadecimali, nessun `$`).
    - Chiede all'utente le credenziali (email e password) per creare il primo amministratore che avrà accesso all'app e lo salva nel database locale.
    - Prepara le directory locali `data/` e `downloads/backups/` e imposta i permessi `chmod +x`.
+   - **Zero dipendenze Node.js sull'host**: le modifiche a `docker-compose.yml` e la scrittura dell'utente in `humidor_db.json` utilizzano comandi nativi POSIX (`sed`, `bash`) con fallback (`python3`/`python`/`sed`), eliminando qualsiasi dipendenza da Node.js sul sistema host.
    - **Stampa finale del riepilogo**: mostra la porta configurata, l'URL locale `http://localhost:<PORT>`, l'URL di rete LAN `http://<IP-LAN>:<PORT>`, le credenziali d'accesso e i comandi CLI.
 
 ---

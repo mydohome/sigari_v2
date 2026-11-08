@@ -144,14 +144,7 @@ if [ -f "$COMPOSE_FILE" ]; then
   log "Allineamento mapping porte in docker-compose.yml..."
   # Assicura che le porte del backend siano parametrizzate con ${APP_PORT:-...}
   if grep -q 'ports:' "$COMPOSE_FILE"; then
-    # Aggiorna mapping con porta host dinamica
-    node -e "
-      const fs = require('fs');
-      let content = fs.readFileSync('${COMPOSE_FILE}', 'utf-8');
-      content = content.replace(/-\s*\"[0-9]+:3000\"/g, '- \"\${APP_PORT:-${SELECTED_PORT}}:3000\"');
-      content = content.replace(/-\s*\"\\\${APP_PORT:-[0-9]+}:3000\"/g, '- \"\${APP_PORT:-${SELECTED_PORT}}:3000\"');
-      fs.writeFileSync('${COMPOSE_FILE}', content, 'utf-8');
-    "
+    sed -i -E "s/\"([0-9]+|\$\{APP_PORT:-[0-9]+\}):3000\"/\"\${APP_PORT:-${SELECTED_PORT}}:3000\"/g" "$COMPOSE_FILE" 2>/dev/null || true
     success "docker-compose.yml aggiornato con porta: \${APP_PORT:-${SELECTED_PORT}}:3000"
   fi
 fi
@@ -273,36 +266,124 @@ DB_FILE="${APP_DIR}/data/humidor_db.json"
 NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 log "Salvataggio utente amministratore '${USER_EMAIL}'..."
-node -e "
-const fs = require('fs');
-const path = '${DB_FILE}';
-let db = {};
-if (fs.existsSync(path)) {
-  try { db = JSON.parse(fs.readFileSync(path, 'utf-8')); } catch(e){}
-}
-if (!db.users) db.users = [];
-if (!db.config) db.config = {};
 
-db.config.ha_api_key = '${HA_KEY}';
-db.config.admin_token = '${ADMIN_TOKEN}';
+save_admin_record() {
+  local email="$1"
+  local pass="$2"
+  local now="$3"
+  local ha_key="$4"
+  local admin_tok="$5"
+  local db_file="$6"
 
-const cleanEmail = '${USER_EMAIL}'.trim().toLowerCase();
-const idx = db.users.findIndex(u => u.email === cleanEmail);
-const record = {
-  id: idx !== -1 ? db.users[idx].id : (db.users.length ? Math.max(...db.users.map(u => u.id)) + 1 : 1),
-  email: cleanEmail,
-  password_hash: 'plain:${USER_PASS}',
-  role: 'admin',
-  created_at: '${NOW}'
-};
-if (idx !== -1) {
-  db.users[idx] = record;
-} else {
-  db.users.push(record);
+  # 1. Tentativo con python3 (presente di serie su quasi tutti i sistemi Linux / Docker host)
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c "
+import json, os
+path = '$db_file'
+db = {}
+if os.path.exists(path):
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            db = json.load(f)
+    except Exception:
+        pass
+db.setdefault('users', [])
+db.setdefault('config', {})
+db['config']['ha_api_key'] = '$ha_key'
+db['config']['admin_token'] = '$admin_tok'
+clean_email = '$email'.strip().lower()
+existing = [u for u in db['users'] if u.get('email') == clean_email]
+if existing:
+    existing[0]['password_hash'] = 'plain:$pass'
+    existing[0]['role'] = 'admin'
+else:
+    new_id = max([u.get('id', 0) for u in db['users']]) + 1 if db['users'] else 1
+    db['users'].append({
+        'id': new_id,
+        'email': clean_email,
+        'password_hash': 'plain:$pass',
+        'role': 'admin',
+        'created_at': '$now'
+    })
+with open(path, 'w', encoding='utf-8') as f:
+    json.dump(db, f, indent=2, ensure_ascii=False)
+" 2>/dev/null && return 0
+  fi
+
+  # 2. Tentativo con python (generico o python 2)
+  if command -v python >/dev/null 2>&1; then
+    python -c "
+import json, os
+path = '$db_file'
+db = {}
+if os.path.exists(path):
+    try:
+        with open(path, 'r') as f:
+            db = json.load(f)
+    except Exception:
+        pass
+if 'users' not in db: db['users'] = []
+if 'config' not in db: db['config'] = {}
+db['config']['ha_api_key'] = '$ha_key'
+db['config']['admin_token'] = '$admin_tok'
+clean_email = '$email'.strip().lower()
+existing = [u for u in db['users'] if u.get('email') == clean_email]
+if existing:
+    existing[0]['password_hash'] = 'plain:$pass'
+    existing[0]['role'] = 'admin'
+else:
+    new_id = max([u.get('id', 0) for u in db['users']]) + 1 if db['users'] else 1
+    db['users'].append({
+        'id': new_id,
+        'email': clean_email,
+        'password_hash': 'plain:$pass',
+        'role': 'admin',
+        'created_at': '$now'
+    })
+with open(path, 'w') as f:
+    json.dump(db, f, indent=2)
+" 2>/dev/null && return 0
+  fi
+
+  # 3. Tentativo con node (se presente)
+  if command -v node >/dev/null 2>&1; then
+    node -e "
+      const fs = require('fs');
+      const p = '$db_file';
+      let db = {};
+      if (fs.existsSync(p)) {
+        try { db = JSON.parse(fs.readFileSync(p, 'utf-8')); } catch(e){}
+      }
+      if (!db.users) db.users = [];
+      if (!db.config) db.config = {};
+      db.config.ha_api_key = '$ha_key';
+      db.config.admin_token = '$admin_tok';
+      const cleanEmail = '$email'.trim().toLowerCase();
+      const idx = db.users.findIndex(u => u.email === cleanEmail);
+      const record = {
+        id: idx !== -1 ? db.users[idx].id : (db.users.length ? Math.max(...db.users.map(u => u.id)) + 1 : 1),
+        email: cleanEmail,
+        password_hash: 'plain:$pass',
+        role: 'admin',
+        created_at: '$now'
+      };
+      if (idx !== -1) { db.users[idx] = record; } else { db.users.push(record); }
+      fs.writeFileSync(p, JSON.stringify(db, null, 2), 'utf-8');
+    " 2>/dev/null && return 0
+  fi
+
+  # 4. Fallback nativo sed su humidor_db.json
+  if [ -f "$db_file" ]; then
+    sed -i "s/\"ha_api_key\": \".*\"/\"ha_api_key\": \"$ha_key\"/" "$db_file" 2>/dev/null || true
+    sed -i "s/\"admin_token\": \".*\"/\"admin_token\": \"$admin_tok\"/" "$db_file" 2>/dev/null || true
+    if grep -q '"users": \[\]' "$db_file"; then
+      sed -i "s/\"users\": \[\]/\"users\": [\n    {\n      \"id\": 1,\n      \"email\": \"$email\",\n      \"password_hash\": \"plain:$pass\",\n      \"role\": \"admin\",\n      \"created_at\": \"$now\"\n    }\n  ]/" "$db_file" 2>/dev/null || true
+    fi
+  fi
+  return 0
 }
-fs.writeFileSync(path, JSON.stringify(db, null, 2), 'utf-8');
-console.log('Utente salvato nel database locale.');
-"
+
+save_admin_record "${USER_EMAIL}" "${USER_PASS}" "${NOW}" "${HA_KEY}" "${ADMIN_TOKEN}" "${DB_FILE}"
 success "Primo utente web '${USER_EMAIL}' registrato con successo!"
 
 # ------------------------------------------------------------------------------

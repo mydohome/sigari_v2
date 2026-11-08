@@ -965,8 +965,16 @@
   ],
   "last_scrape": "2026-11-08T13:47:06.666Z",
   "config": {
-    "ha_api_key": "",
-    "admin_token": "sigari_admin_token_2026"
+    "ha_api_key": "fakehakey123",
+    "admin_token": "faketoken123"
   },
-  "users": []
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@sigari.local",
+      "password_hash": "plain:adminpass123",
+      "role": "admin",
+      "created_at": "2026-11-08T20:13:23Z"
+    }
+  ]
 }
