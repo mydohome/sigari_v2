@@ -37,7 +37,7 @@ services:
       HA_API_KEY: ${HA_API_KEY:-}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     ports:
-      - "3000:3000"
+      - "${APP_PORT:-3000}:3000"
     volumes:
       - sigari_downloads:/app/downloads
 

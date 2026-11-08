@@ -51,10 +51,13 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
 
 4. **Script di Setup Automatico (`setup.sh`)**:
    - Eseguibile con `./setup.sh` subito dopo `git clone`.
-   - Genera tutte le chiavi crittografiche pulite nel file `.env`.
-   - Chiede all'utente le credenziali (email e password) per creare il primo amministratore che avrà accesso all'app.
-   - Prepara le directory locali `data/` e `downloads/backups/`.
-   - Configura i permessi di esecuzione (`chmod +x`).
+   - **Rilevamento intelligente delle porte libere**: verifica lo stato delle porte su host e su tutti i container Docker attivi (tramite `ss`, `netstat`, `lsof`, socket probe e `docker ps --format '{{.Ports}}'`).
+   - Se la porta 3000 è occupata da un altro servizio o container, propone automaticamente la prima porta libera successiva (3001, 3002...) permettendo all'utente di confermare o specificare una porta a scelta.
+   - Allinea automaticamente `docker-compose.yml` (`- "${APP_PORT:-<PORT>}:3000"`) e il file `.env` (`APP_PORT=<PORT>`).
+   - Genera tutte le chiavi crittografiche pulite (solo esadecimali, nessun `$`).
+   - Chiede all'utente le credenziali (email e password) per creare il primo amministratore che avrà accesso all'app e lo salva nel database locale.
+   - Prepara le directory locali `data/` e `downloads/backups/` e imposta i permessi `chmod +x`.
+   - **Stampa finale del riepilogo**: mostra la porta configurata, l'URL locale `http://localhost:<PORT>`, l'URL di rete LAN `http://<IP-LAN>:<PORT>`, le credenziali d'accesso e i comandi CLI.
 
 ---
 

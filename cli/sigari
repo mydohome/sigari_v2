@@ -28,7 +28,17 @@ error() { echo -e "${RED}✖${NC} $*"; }
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BACKUP_DIR="${APP_DIR}/downloads/backups"
-API_URL="${API_URL:-http://localhost:3000/api}"
+
+# Rileva la porta configurata da .env se presente
+CLI_PORT="3000"
+if [ -f "${APP_DIR}/.env" ]; then
+  CLI_PORT=$(grep -E '^APP_PORT=' "${APP_DIR}/.env" | cut -d '=' -f2 | tr -d ' "\r' || true)
+  if [ -z "$CLI_PORT" ]; then
+    CLI_PORT=$(grep -E '^PORT=' "${APP_DIR}/.env" | cut -d '=' -f2 | tr -d ' "\r' || "3000")
+  fi
+fi
+CLI_PORT="${CLI_PORT:-3000}"
+API_URL="${API_URL:-http://localhost:${CLI_PORT}/api}"
 
 mostra_help() {
   echo -e "${BOLD}Sigari Track CLI${NC} - Comandi di amministrazione lato server"
