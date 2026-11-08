@@ -1424,7 +1424,7 @@ app.post("/api/server/commands/run", async (req: Request, res: Response) => {
       output: [
         `=== SIGARI TRACK STACK STATUS ===`,
         `• Container Backend: [RUNNING] Node.js 22 + Express (porta 3000)`,
-        `• Container Database: [HEALTHY] PostgreSQL 16 Alpine (porta 5432)`,
+        `• Container Database: [HEALTHY] PostgreSQL 16 Alpine (rete interna isolata)`,
         `• Scraper Cron: 0 3 * * 1 (attivo ogni lunedì ore 03:00)`,
         `• Catalogo Sigari: ${db.products.length} referenze ufficiali ADM`,
         `• Inventario Humidor: ${db.items.reduce((s, i) => s + i.quantita_rimanente, 0)} sigari custoditi`,

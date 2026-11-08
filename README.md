@@ -35,7 +35,7 @@ docker compose up -d --build
 
 - **Interfaccia Web**: [http://localhost:3000](http://localhost:3000)
 - **API Backend**: [http://localhost:3000/api](http://localhost:3000/api)
-- **Database PostgreSQL**: Porta `5432`
+- **Database PostgreSQL**: Rete interna Docker privata `sigari_internal_network` (non esposto sull'host per evitare conflitti di porta)
 
 ---
 

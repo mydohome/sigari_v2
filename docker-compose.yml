@@ -9,8 +9,10 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-tabacchi_prezzi}
     volumes:
       - db_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    networks:
+      - sigari_internal_network
+    expose:
+      - "5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tabacchi}"]
       interval: 5s
@@ -26,6 +28,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - sigari_internal_network
     environment:
       NODE_ENV: production
       PORT: 3000
@@ -46,3 +50,8 @@ volumes:
     name: sigari_db_data
   sigari_downloads:
     name: sigari_downloads_data
+
+networks:
+  sigari_internal_network:
+    name: sigari_internal_network
+    driver: bridge

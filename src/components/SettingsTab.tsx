@@ -1528,7 +1528,7 @@ rest_command:
               <div className="p-3 rounded-lg bg-[#0e0a09] border border-[#221814] space-y-1">
                 <span className="text-[#d9aa6b] font-bold block">./cli/sigari status</span>
                 <span className="text-[11px] text-[#7d6f66] block font-sans">
-                  Mostra lo stato di salute dei container (Node.js, PostgreSQL 16), porte attive (3000, 5432) e ultimo scrape effettuato.
+                  Mostra lo stato di salute dei container (Node.js su porta web, PostgreSQL su rete interna privata) e ultimo scrape effettuato.
                 </span>
               </div>
             </div>

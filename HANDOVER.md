@@ -22,7 +22,7 @@ Questo documento sintetizza lo stato completo dell'applicazione, le scelte archi
 
 - **Backend**: Node.js 22 + Express (TypeScript con runtime `tsx`), che espone API REST complete per tutte le entità (`/api/prices/*`, `/api/humidor/*`, `/api/settings/*`, `/api/auth/*`, `/api/ha/*`).
 - **Database & Storage**:
-  - In ambiente Docker di produzione: container PostgreSQL 16 Alpine (`sigari-db`) con volume persistente `sigari_db_data`.
+  - In ambiente Docker di produzione: container PostgreSQL 16 Alpine (`sigari-db`) con volume persistente `sigari_db_data`, isolato sulla rete privata interna `sigari_internal_network` senza esposizione della porta 5432 sull'host (eliminando qualsiasi conflitto con Postgres preesistenti sul server).
   - In ambiente server/sviluppo: storage JSON transazionale auto-migrante in `data/humidor_db.json`, esportabile e ripristinabile al 100% come dump/snapshot.
 - **Frontend**: Single Page Application React 19 + TypeScript, bundler Vite, utility Tailwind CSS v4, icone Lucide, font tipografici *Cinzel*, *Plus Jakarta Sans* e *JetBrains Mono*, animazioni Motion e palette cromatica calda in stile club del fumo (*#120f0e*, *#181210*, *#c99757*, *#8b5e34*).
 - **Mobile First & Responsive**: barra di navigazione inferiore fissa (*thumb-zone*) con target di tocco $\ge 44\text{px}$, modal a scorrimento rapido e adattamento fluido per smartphone, tablet e desktop 1440px.
