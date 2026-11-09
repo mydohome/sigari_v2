@@ -4,12 +4,12 @@ import fs from "fs/promises";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import dotenv from "dotenv";
 import { INITIAL_PRODUCTS, MOCK_PRICE_HISTORIES } from "./src/data/cigarCatalog";
-import { Product, HumidorItem, HumidorLocation, HumidorShop, Fumata, TastingReview, Favorite, WishlistItem } from "./src/types/cigar";
+import { Product, Provenienza, HumidorItem, HumidorLocation, HumidorShop, Fumata, TastingReview, Favorite, WishlistItem } from "./src/types/cigar";
 
 dotenv.config();
 
 const app = express();
-const PORT = Number(process.env.PORT || 3000);
+const PORT = 3000;
 const DATA_DIR = path.join(process.cwd(), "data");
 const BACKUP_DIR = path.join(process.cwd(), "downloads", "backups");
 const DB_FILE = path.join(DATA_DIR, "humidor_db.json");
@@ -85,237 +85,16 @@ function getInitialDB(): DBState {
     { id: 3, nome: "Cigar Lounge Milano Duomo", indirizzo: "Galleria Vittorio Emanuele II, Milano", lat: 45.4642, lon: 9.19 },
   ];
 
-  const initialItems: HumidorItem[] = [
-    {
-      id: 1,
-      product_id: 1, // Cohiba Robusto
-      shop_id: 1,
-      shop_nome: "Tabaccheria del Corso - Habanos Specialist",
-      location_id: 1,
-      location_nome: "Humidor Principale (Cedro)",
-      location_colore: "#8b5e34",
-      prezzo_acquisto: 75.0,
-      data_acquisto: "2026-08-10",
-      quantita_iniziale: 5,
-      quantita_rimanente: 3,
-      note: "Scatola sigillata con timbro fábrica El Laguito, conservati a 69% UR.",
-      created_at: "2026-08-10T14:30:00.000Z",
-    },
-    {
-      id: 2,
-      product_id: 4, // Montecristo No. 2
-      shop_id: 1,
-      shop_nome: "Tabaccheria del Corso - Habanos Specialist",
-      location_id: 1,
-      location_nome: "Humidor Principale (Cedro)",
-      location_colore: "#8b5e34",
-      prezzo_acquisto: 25.0,
-      data_acquisto: "2026-07-15",
-      quantita_iniziale: 10,
-      quantita_rimanente: 7,
-      note: "Piramidi perfette, capa setosa colorado claro.",
-      created_at: "2026-07-15T11:00:00.000Z",
-    },
-    {
-      id: 3,
-      product_id: 17, // Toscano Antico
-      shop_id: 2,
-      shop_nome: "Antica Manifattura Lucchese Shop",
-      location_id: 2,
-      location_nome: "Giara Vetro Toscani",
-      location_colore: "#43a047",
-      prezzo_acquisto: 8.5,
-      data_acquisto: "2026-09-01",
-      quantita_iniziale: 15,
-      quantita_rimanente: 11,
-      note: "Stagionati in giara ermetica con Boveda 65%. Fumo denso e legnoso.",
-      created_at: "2026-09-01T09:20:00.000Z",
-    },
-    {
-      id: 4,
-      product_id: 25, // Arturo Fuente Opus X
-      shop_id: 3,
-      shop_nome: "Cigar Lounge Milano Duomo",
-      location_id: 3,
-      location_nome: "Tupperdor Invecchiamento",
-      location_colore: "#4a90d9",
-      prezzo_acquisto: 38.0,
-      data_acquisto: "2026-05-20",
-      quantita_iniziale: 4,
-      quantita_rimanente: 2,
-      note: "Riservati per festeggiamenti speciali. Affinamento di 6 mesi.",
-      created_at: "2026-05-20T17:45:00.000Z",
-    },
-    {
-      id: 5,
-      product_id: 7, // Partagás Serie D No. 4
-      shop_id: 1,
-      shop_nome: "Tabaccheria del Corso - Habanos Specialist",
-      location_id: 1,
-      location_nome: "Humidor Principale (Cedro)",
-      location_colore: "#8b5e34",
-      prezzo_acquisto: 19.0,
-      data_acquisto: "2026-08-28",
-      quantita_iniziale: 6,
-      quantita_rimanente: 4,
-      note: "Classico robusto cubano, tiraggio perfetto.",
-      created_at: "2026-08-28T16:10:00.000Z",
-    },
-  ];
-
-  const initialFumate: Fumata[] = [
-    {
-      id: 1,
-      humidor_item_id: 1,
-      product_id: 1,
-      quantita: 1,
-      data_fumata: "2026-11-06",
-      ora_inizio: "21:15",
-      ora_fine: "22:20",
-      durata_minuti: 65,
-      riaccensioni: 0,
-      stelle: 5,
-      note: "Fumata maestosa. Cenere bianchissima compatta, note di cedro e cacao amaro persistenti per ore.",
-      abbinamento: "Rum Zacapa XO 23 Anni",
-      created_at: "2026-11-06T22:25:00.000Z",
-    },
-    {
-      id: 2,
-      humidor_item_id: 2,
-      product_id: 4,
-      quantita: 1,
-      data_fumata: "2026-11-03",
-      ora_inizio: "18:30",
-      ora_fine: "19:50",
-      durata_minuti: 80,
-      riaccensioni: 1,
-      stelle: 5,
-      note: "Taglio a V sulla testa piramidale. Evoluzione eccezionale nel secondo terzo con cioccolato fondente e cuoio.",
-      abbinamento: "Caffè Monorigine Etiopia & Cioccolato 80%",
-      created_at: "2026-11-03T20:00:00.000Z",
-    },
-    {
-      id: 3,
-      humidor_item_id: 3,
-      product_id: 17,
-      quantita: 1,
-      data_fumata: "2026-10-30",
-      ora_inizio: "17:00",
-      ora_fine: "18:05",
-      durata_minuti: 65,
-      riaccensioni: 0,
-      stelle: 4,
-      note: "Fumato intero 'alla maremmana'. Pungente e vigoroso, classica fumosità Kentucky toscano.",
-      abbinamento: "Grappa barricata di Amarone",
-      created_at: "2026-10-30T18:10:00.000Z",
-    },
-    {
-      id: 4,
-      humidor_item_id: 5,
-      product_id: 7,
-      quantita: 1,
-      data_fumata: "2026-10-24",
-      ora_inizio: "21:30",
-      ora_fine: "22:25",
-      durata_minuti: 55,
-      riaccensioni: 1,
-      stelle: 5,
-      note: "Serie D4 infallibile. Pepe nero iniziale poi morbidezza vellutata terrosa.",
-      abbinamento: "Lagavulin 16 Islay Single Malt",
-      created_at: "2026-10-24T22:30:00.000Z",
-    },
-    {
-      id: 5,
-      humidor_item_id: 3,
-      product_id: 17,
-      quantita: 1,
-      data_fumata: "2026-10-18",
-      ora_inizio: "16:45",
-      ora_fine: "17:40",
-      durata_minuti: 55,
-      riaccensioni: 0,
-      stelle: 4,
-      note: "Ammezzato in giardino al tramonto. Fumo denso e tostato.",
-      abbinamento: "Espresso doppio amaro",
-      created_at: "2026-10-18T17:45:00.000Z",
-    },
-    {
-      id: 6,
-      humidor_item_id: 4,
-      product_id: 25,
-      quantita: 1,
-      data_fumata: "2026-10-10",
-      ora_inizio: "20:00",
-      ora_fine: "21:25",
-      durata_minuti: 85,
-      riaccensioni: 0,
-      stelle: 5,
-      note: "Opus X in forma smagliante. Spezie dolci, vaniglia naturale e corpo pieno senza aggressività.",
-      abbinamento: "Cognac Pierre Ferrand 1840",
-      created_at: "2026-10-10T21:30:00.000Z",
-    },
-  ];
-
-  const initialReviews: Record<number, TastingReview> = {
-    1: {
-      id: 1,
-      product_id: 1,
-      stelle: 5,
-      descrizione: "Capolavoro assoluto. Struttura armonica, fumo vellutato con progressione da cedro nobile a fava di cacao e cuoio.",
-      aromi: ["Cedro", "Cacao", "Cuoio", "Vaniglia"],
-      forza: "Medio-forte",
-      combustione: "Perfetta",
-      tiraggio: "Ottimale",
-      abbinamento_consigliato: "Rum millesimato o Porto d'annata",
-      updated_at: "2026-11-06T22:30:00.000Z",
-    },
-    4: {
-      id: 2,
-      product_id: 4,
-      stelle: 5,
-      descrizione: "La forma a piramide regala un bouquet sempre più fitto. Note marcate di terra umida, torrefazione e spezie dolci.",
-      aromi: ["Terra", "Caffè", "Spezie", "Cioccolato"],
-      forza: "Forte",
-      combustione: "Perfetta",
-      tiraggio: "Ottimale",
-      abbinamento_consigliato: "Whisky torbato o caffè espresso estratto a regola d'arte",
-      updated_at: "2026-11-03T20:10:00.000Z",
-    },
-    17: {
-      id: 3,
-      product_id: 17,
-      stelle: 4,
-      descrizione: "Il re del fumo rustico toscano. Forza decisa, affumicatura a legna naturale e persistenza gustativa eccezionale.",
-      aromi: ["Legno affumicato", "Cuoio", "Pepe", "Erbe aromatiche"],
-      forza: "Forte",
-      combustione: "Buona",
-      tiraggio: "Ottimale",
-      abbinamento_consigliato: "Vino Chianti Classico Riserva o Grappa di Brunello",
-      updated_at: "2026-10-30T18:20:00.000Z",
-    },
-  };
-
-  const initialFavorites: Favorite[] = [
-    { id: 1, product_id: 1, tag: "Occasioni Speciali", created_at: "2026-08-10T14:35:00.000Z" },
-    { id: 2, product_id: 4, tag: "Top Classico", created_at: "2026-07-15T11:15:00.000Z" },
-    { id: 3, product_id: 17, tag: "Quotidiano", created_at: "2026-09-01T09:30:00.000Z" },
-  ];
-
-  const initialWishlist: WishlistItem[] = [
-    { id: 1, product_id: 3, quantita: 2, created_at: "2026-11-01T10:00:00.000Z" }, // Cohiba Siglo VI
-    { id: 2, product_id: 22, quantita: 1, created_at: "2026-11-02T15:20:00.000Z" }, // Il Moro
-  ];
-
   return {
     products: INITIAL_PRODUCTS,
     price_histories: MOCK_PRICE_HISTORIES,
     locations: initialLocations,
     shops: initialShops,
-    items: initialItems,
-    fumate: initialFumate,
-    reviews: initialReviews,
-    favorites: initialFavorites,
-    wishlist: initialWishlist,
+    items: [],
+    fumate: [],
+    reviews: {},
+    favorites: [],
+    wishlist: [],
     last_scrape: new Date().toISOString(),
     config: {
       ha_api_key: process.env.HA_API_KEY || "",
@@ -493,6 +272,147 @@ app.get("/api/prices/meta/provenienze", (_req: Request, res: Response) => {
 app.get("/api/prices/meta/marche", (_req: Request, res: Response) => {
   const marche = Array.from(new Set(db.products.map((p) => p.marca.split(" ")[0]))).sort();
   res.json({ marche });
+});
+
+// Helper per sincronizzare catalogo FIT con INITIAL_PRODUCTS
+function syncFitCatalog(): { count: number; added: number; updated: number } {
+  let added = 0;
+  let updated = 0;
+  const existingMap = new Map<string, Product>();
+  for (const p of db.products) {
+    existingMap.set(p.codice_prodotto, p);
+  }
+
+  for (const initProd of INITIAL_PRODUCTS) {
+    if (existingMap.has(initProd.codice_prodotto)) {
+      const idx = db.products.findIndex((p) => p.codice_prodotto === initProd.codice_prodotto);
+      if (idx !== -1) {
+        db.products[idx] = { ...db.products[idx], ...initProd };
+        updated++;
+      }
+    } else {
+      const maxId = db.products.length ? Math.max(...db.products.map((p) => p.id)) : 0;
+      db.products.push({ ...initProd, id: maxId + 1 });
+      existingMap.set(initProd.codice_prodotto, initProd);
+      added++;
+    }
+  }
+
+  for (const [idStr, hist] of Object.entries(MOCK_PRICE_HISTORIES)) {
+    const id = Number(idStr);
+    if (!db.price_histories[id]) {
+      db.price_histories[id] = hist;
+    }
+  }
+
+  db.last_scrape = new Date().toISOString();
+  saveDB(db);
+  return { count: db.products.length, added, updated };
+}
+
+// POST /api/catalog/fit-sync
+app.post("/api/catalog/fit-sync", (_req: Request, res: Response) => {
+  const stats = syncFitCatalog();
+  res.json({
+    success: true,
+    count: stats.count,
+    added: stats.added,
+    updated: stats.updated,
+    last_scrape: db.last_scrape,
+    message: `Listino ufficiale FIT aggiornato con successo: ${stats.count} sigari disponibili.`,
+  });
+});
+
+// POST /api/admin/scrape-now (usato da cli/sigari e da UI)
+app.post("/api/admin/scrape-now", (_req: Request, res: Response) => {
+  const stats = syncFitCatalog();
+  res.json({
+    success: true,
+    count: stats.count,
+    added: stats.added,
+    updated: stats.updated,
+    last_scrape: db.last_scrape,
+    message: `Scraping listino FIT completato con successo: ${stats.count} sigari sincronizzati.`,
+  });
+});
+
+// POST /api/catalog/fit-upload (importa file Excel/CSV listino ufficiale ADM/FIT)
+app.post("/api/catalog/fit-upload", (req: Request, res: Response) => {
+  const { products: rawProducts } = req.body;
+  if (!Array.isArray(rawProducts) || rawProducts.length === 0) {
+    return res.status(400).json({ error: "Nessun prodotto valido individuato nel file" });
+  }
+
+  let imported = 0;
+  let currentMaxId = db.products.length ? Math.max(...db.products.map((p) => p.id)) : 0;
+
+  for (const raw of rawProducts) {
+    const marca = String(raw.marca || raw["Descrizione"] || raw["Marca"] || "").trim();
+    if (!marca) continue;
+
+    const codice = String(raw.codice_prodotto || raw["Codice ADM"] || raw["Codice"] || `ADM_${Date.now()}_${imported}`).trim();
+    const categoria = raw.categoria || (marca.toLowerCase().includes("toscanello") || marca.toLowerCase().includes("mini") || marca.toLowerCase().includes("club") || marca.toLowerCase().includes("puritos") ? "Sigaretti" : "Sigari");
+    const pezzi = Math.max(1, Number(raw.pezzi_per_confezione || raw["Pezzi per Confezione"] || raw["Confezione"] || 1));
+    const prezzoConf = Number(raw.prezzo_confezione || raw["Prezzo Confezione"] || raw["Prezzo Pacchetto"] || (Number(raw.prezzo_singolo || 10) * pezzi));
+    const prezzoSingolo = +(Number(raw.prezzo_singolo || (prezzoConf / pezzi))).toFixed(2);
+
+    let provenienza: Provenienza = "Altro";
+    const mLower = marca.toLowerCase();
+    if (mLower.includes("cohiba") || mLower.includes("montecristo") || mLower.includes("partagas") || mLower.includes("partagás") || mLower.includes("romeo") || mLower.includes("hoyo") || mLower.includes("upmann") || mLower.includes("trinidad") || mLower.includes("bolivar") || mLower.includes("bolívar") || mLower.includes("quintero") || mLower.includes("piedra") || mLower.includes("allones") || mLower.includes("cuaba") || mLower.includes("vegueros") || mLower.includes("san cristobal") || mLower.includes("punch") || mLower.includes("fonseca")) {
+      provenienza = "Cuba";
+    } else if (mLower.includes("toscano") || mLower.includes("toscanello") || mLower.includes("moro") || mLower.includes("tornabuoni") || mLower.includes("nostrano") || mLower.includes("brenta") || mLower.includes("italico")) {
+      provenienza = "Italia";
+    } else {
+      provenienza = "Extra-Cuba";
+    }
+
+    const existingIdx = db.products.findIndex((p) => p.codice_prodotto === codice || p.marca.toLowerCase() === marca.toLowerCase());
+    if (existingIdx !== -1) {
+      db.products[existingIdx] = {
+        ...db.products[existingIdx],
+        marca,
+        categoria,
+        pezzi_per_confezione: pezzi,
+        prezzo_confezione: prezzoConf,
+        prezzo_singolo: prezzoSingolo,
+        ultimo_aggiornamento: new Date().toISOString().split("T")[0],
+      };
+    } else {
+      currentMaxId++;
+      db.products.push({
+        id: currentMaxId,
+        marca,
+        categoria,
+        formato: `Confezione da ${pezzi} pezzi`,
+        pezzi_per_confezione: pezzi,
+        prezzo_confezione: prezzoConf,
+        prezzo_singolo: prezzoSingolo,
+        codice_prodotto: codice,
+        provenienza,
+        ultimo_aggiornamento: new Date().toISOString().split("T")[0],
+        vitola: raw.vitola || "Classica",
+      });
+    }
+    imported++;
+  }
+
+  db.last_scrape = new Date().toISOString();
+  saveDB(db);
+  res.json({ success: true, count: imported, totale_catalogo: db.products.length, message: `Importati con successo ${imported} prodotti nel listino FIT!` });
+});
+
+// POST /api/humidor/reset-test-data (elimina solo i dati di test lasciando intatte configurazioni e location)
+app.post("/api/humidor/reset-test-data", (_req: Request, res: Response) => {
+  db.items = [];
+  db.fumate = [];
+  db.reviews = {};
+  db.favorites = [];
+  db.wishlist = [];
+  saveDB(db);
+  res.json({
+    success: true,
+    message: "Dati di test azzerati con successo. L'humidor e lo storico fumate sono ora completamente puliti.",
+  });
 });
 
 // ==========================================

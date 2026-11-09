@@ -175,6 +175,16 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
   const [importDefaultLocationId, setImportDefaultLocationId] = useState<number>(locations[0]?.id || 1);
   const [isImporting, setIsImporting] = useState(false);
 
+  // FIT Catalog Sync & Upload State
+  const [isSyncingFit, setIsSyncingFit] = useState(false);
+  const fitFileInputRef = useRef<HTMLInputElement>(null);
+  const [fitImportRows, setFitImportRows] = useState<any[]>([]);
+  const [fitImportFileName, setFitImportFileName] = useState<string | null>(null);
+  const [isUploadingFit, setIsUploadingFit] = useState(false);
+
+  // Reset Test Data State
+  const [isResettingTestData, setIsResettingTestData] = useState(false);
+
   // Export: Humidor inventory
   const handleExportHumidor = (format: "xlsx" | "csv") => {
     if (items.length === 0) {
@@ -469,6 +479,173 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
       notify("Errore di rete: " + err.message, "error");
     } finally {
       setIsImporting(false);
+    }
+  };
+
+  // Sync complete official FIT catalog
+  const handleSyncFitCatalog = async () => {
+    setIsSyncingFit(true);
+    try {
+      const res = await fetch("/api/catalog/fit-sync", { method: "POST" });
+      const data = await res.json();
+      if (res.ok) {
+        notify(`✔ ${data.message}`);
+        onRefreshData();
+      } else {
+        notify(data.error || "Errore sincronizzazione catalogo", "error");
+      }
+    } catch (err: any) {
+      notify("Errore di rete: " + err.message, "error");
+    } finally {
+      setIsSyncingFit(false);
+    }
+  };
+
+  // Parse official ADM / FIT Excel or CSV file
+  const handleFitFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setFitImportFileName(file.name);
+    const reader = new FileReader();
+
+    reader.onload = (evt) => {
+      try {
+        const data = new Uint8Array(evt.target?.result as ArrayBuffer);
+        const workbook = XLSX.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const rawJson: any[] = XLSX.utils.sheet_to_json(sheet);
+
+        if (!rawJson || rawJson.length === 0) {
+          notify("Il file del listino è vuoto o non leggibile.", "error");
+          setFitImportRows([]);
+          return;
+        }
+
+        // Normalizza colonne tipiche dei file ADM / FIT
+        const parsed = rawJson
+          .map((row) => {
+            const codice =
+              row["Codice ADM / Prodotto"] ||
+              row["CODICE"] ||
+              row["Codice"] ||
+              row["Codice ADM"] ||
+              row["codice_prodotto"] ||
+              row["Codice Tariffa"] ||
+              "";
+
+            const marca =
+              row["Marca / Denominazione"] ||
+              row["DENOMINAZIONE"] ||
+              row["Denominazione"] ||
+              row["DESCRIZIONE"] ||
+              row["Descrizione"] ||
+              row["Marca"] ||
+              row["marca"] ||
+              "";
+
+            const formato = row["Formato"] || row["formato"] || row["FORMATO"] || "";
+            const pezzi =
+              row["Pezzi per Confezione"] ||
+              row["CONFEZIONE"] ||
+              row["Confezione"] ||
+              row["Pezzi"] ||
+              row["pezzi_per_confezione"] ||
+              1;
+
+            const prezzoConf =
+              row["Prezzo Confezione (€)"] ||
+              row["PREZZO CONFEZIONE"] ||
+              row["Prezzo Confezione"] ||
+              row["Prezzo Pacchetto"] ||
+              row["prezzo_confezione"] ||
+              null;
+
+            const prezzoSingolo =
+              row["Prezzo Singolo (€)"] ||
+              row["PREZZO SINGOLO"] ||
+              row["Prezzo Singolo"] ||
+              row["prezzo_singolo"] ||
+              null;
+
+            const vitola = row["Vitola"] || row["vitola"] || row["VITOLA"] || "";
+
+            return {
+              codice_prodotto: String(codice).trim(),
+              marca: String(marca).trim(),
+              formato: formato ? String(formato).trim() : null,
+              pezzi_per_confezione: Math.max(1, Number(pezzi) || 1),
+              prezzo_confezione: prezzoConf !== null ? Number(prezzoConf) : undefined,
+              prezzo_singolo: prezzoSingolo !== null ? Number(prezzoSingolo) : undefined,
+              vitola: vitola ? String(vitola).trim() : undefined,
+            };
+          })
+          .filter((p) => Boolean(p.marca));
+
+        setFitImportRows(parsed);
+        if (parsed.length === 0) {
+          notify("Nessuna referenza valida individuata nel file del listino.", "error");
+        } else {
+          notify(`Individuati ${parsed.length} sigari ufficiali nel file FIT!`);
+        }
+      } catch (err: any) {
+        notify("Errore lettura file FIT: " + err.message, "error");
+        setFitImportRows([]);
+      }
+    };
+
+    reader.readAsArrayBuffer(file);
+  };
+
+  // Confirm official FIT upload
+  const handleConfirmFitUpload = async () => {
+    if (fitImportRows.length === 0) return;
+    setIsUploadingFit(true);
+    try {
+      const res = await fetch("/api/catalog/fit-upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ products: fitImportRows }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        notify(`🎉 ${data.message}`);
+        setFitImportRows([]);
+        setFitImportFileName(null);
+        if (fitFileInputRef.current) fitFileInputRef.current.value = "";
+        onRefreshData();
+      } else {
+        notify(data.error || "Errore aggiornamento listino", "error");
+      }
+    } catch (err: any) {
+      notify("Errore di rete: " + err.message, "error");
+    } finally {
+      setIsUploadingFit(false);
+    }
+  };
+
+  // Reset test data
+  const handleResetTestData = async () => {
+    const confirmed = window.confirm(
+      "ATTENZIONE: Questa azione eliminerà tutti i sigari presenti nell'humidor, lo storico delle sessioni di fumata, le recensioni sensoriali e la wishlist.\n\nLe tue location, i negozi/tabaccherie, gli utenti e le impostazioni rimarranno invariate.\n\nVuoi procedere con la pulizia dei dati di prova?"
+    );
+    if (!confirmed) return;
+
+    setIsResettingTestData(true);
+    try {
+      const res = await fetch("/api/humidor/reset-test-data", { method: "POST" });
+      const data = await res.json();
+      if (res.ok) {
+        notify("✔ Dati di test azzerati! L'humidor è ora pulito e pronto per i tuoi veri sigari.");
+        onRefreshData();
+      } else {
+        notify(data.error || "Errore azzeramento dati", "error");
+      }
+    } catch (err: any) {
+      notify("Errore: " + err.message, "error");
+    } finally {
+      setIsResettingTestData(false);
     }
   };
 
@@ -1251,6 +1428,152 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
                 </div>
               )}
             </div>
+
+            {/* SEZIONE SPECIALE: LISTINO UFFICIALE FIT / ADM */}
+            <div className="pt-6 border-t border-[#261d19] space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#241913] border border-[#3d2b20] flex items-center justify-center text-[#c99757]">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-[#faf3ea]">
+                      Listino Prezzi Ufficiale FIT & Monopoli (ADM)
+                    </h3>
+                    <p className="text-xs text-[#8c7e75]">
+                      {products.length} referenze ufficiali attualmente registrate nel catalogo italiano
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleSyncFitCatalog}
+                  disabled={isSyncingFit}
+                  className="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-[#14100e] bg-gradient-to-r from-[#d9aa6b] to-[#b37d3e] rounded-xl shadow-md active:scale-95 disabled:opacity-60 transition-all"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${isSyncingFit ? "animate-spin" : ""}`} />
+                  <span>{isSyncingFit ? "Sincronizzazione in corso..." : "Sincronizza Listino Completo FIT Online"}</span>
+                </button>
+              </div>
+
+              {/* Box Istruzioni: Come scaricare il listino ufficiale FIT */}
+              <div className="p-4 rounded-xl bg-[#120e0d] border border-[#2b2019] space-y-2.5 text-xs text-[#a3948b]">
+                <div className="flex items-center gap-2 text-[#c99757] font-semibold">
+                  <HelpCircle className="w-4 h-4" />
+                  <span>Come scaricare il file del listino completo da ADM o FIT?</span>
+                </div>
+                <p className="leading-relaxed text-[#8c7e75]">
+                  In Italia la vendita dei tabacchi lavorati è regolata dall'<strong>Agenzia delle Dogane e dei Monopoli (ADM)</strong> e dalla <strong>Federazione Italiana Tabaccai (FIT)</strong>, che pubblicano periodicamente la tariffa ufficiale completa:
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                  <div className="p-3 rounded-lg bg-[#181310] border border-[#241a15]">
+                    <span className="font-semibold text-[#f5ebd9] block mb-1">1. Agenzia delle Dogane e Monopoli (ADM)</span>
+                    <p className="text-[11px] text-[#7d6f66] leading-relaxed">
+                      Visita <code className="text-[#c99757]">www.adm.gov.it</code> &gt; <em>Monopoli</em> &gt; <em>Tabacchi</em> &gt; <em>Prezzi e tariffe di vendita al pubblico</em>. Troverai la tabella scaricabile in formato Excel con tutti i sigari e sigaretti commercializzati.
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-[#181310] border border-[#241a15]">
+                    <span className="font-semibold text-[#f5ebd9] block mb-1">2. Federazione Italiana Tabaccai (FIT)</span>
+                    <p className="text-[11px] text-[#7d6f66] leading-relaxed">
+                      Visita <code className="text-[#c99757]">www.tabaccai.it</code> &gt; <em>Servizi</em> &gt; <em>Tariffe</em>. È disponibile il prospetto aggiornato delle variazioni tariffarie e il catalogo completo per marca e confezione.
+                    </p>
+                  </div>
+                </div>
+                <p className="text-[11px] text-[#7d6f66] italic">
+                  💡 Puoi cliccare su <strong>"Sincronizza Listino Completo FIT Online"</strong> per caricare subito l'intero catalogo curato, oppure trascinare qui sotto il file scaricato da ADM/FIT.
+                </p>
+              </div>
+
+              {/* Uploader dedicato per file tariffa ADM/FIT */}
+              <div
+                onClick={() => fitFileInputRef.current?.click()}
+                className="p-5 rounded-2xl bg-[#120e0d] border-2 border-dashed border-[#342720] hover:border-[#c99757] transition-all cursor-pointer text-center group"
+              >
+                <input
+                  type="file"
+                  ref={fitFileInputRef}
+                  onChange={handleFitFileChange}
+                  accept=".xlsx, .xls, .csv"
+                  className="hidden"
+                />
+                <Upload className="w-8 h-8 text-[#c99757] mx-auto mb-1.5 group-hover:scale-110 transition-transform" />
+                <span className="text-xs font-semibold text-[#f5ebd9] block">
+                  {fitImportFileName ? fitImportFileName : "Carica o trascina il file tariffa ufficiale ADM/FIT (.xlsx, .xls, .csv)"}
+                </span>
+                <span className="text-[10px] text-[#7d6f66] block mt-0.5">
+                  Riconoscimento automatico colonne Codice ADM, Denominazione, Confezione e Prezzi al pubblico
+                </span>
+              </div>
+
+              {/* Anteprima file FIT importato */}
+              {fitImportRows.length > 0 && (
+                <div className="p-4 rounded-xl bg-[#140f0d] border border-[#2f241f] space-y-3 animate-fade-in">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-xs text-[#f5ebd9] flex items-center gap-1.5">
+                        <Check className="w-4 h-4 text-emerald-400" />
+                        <span>{fitImportRows.length} referenze ufficiali pronte per l'aggiornamento</span>
+                      </span>
+                      <span className="text-[11px] text-[#8c7e75] block mt-0.5">
+                        I nuovi sigari verranno aggiunti al listino e i prezzi esistenti verranno allineati
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFitImportRows([]);
+                          setFitImportFileName(null);
+                          if (fitFileInputRef.current) fitFileInputRef.current.value = "";
+                        }}
+                        className="px-3 py-1.5 text-xs text-[#a3948b] hover:text-[#f5ebd9]"
+                      >
+                        Annulla
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleConfirmFitUpload}
+                        disabled={isUploadingFit}
+                        className="px-4 py-1.5 text-xs font-semibold text-[#14100e] bg-gradient-to-r from-[#d9aa6b] to-[#b37d3e] rounded-lg shadow-sm active:scale-95 disabled:opacity-50"
+                      >
+                        {isUploadingFit ? "Aggiornamento in corso..." : `Conferma e Salva ${fitImportRows.length} Sigari`}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="max-h-48 overflow-y-auto rounded-lg border border-[#261d19]">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#1c1512] text-[#c99757] font-mono uppercase text-[10px] sticky top-0">
+                        <tr>
+                          <th className="p-2">Codice</th>
+                          <th className="p-2">Marca / Denominazione</th>
+                          <th className="p-2">Conf.</th>
+                          <th className="p-2">Prezzo Conf.</th>
+                          <th className="p-2">Prezzo Unitario</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#221915] text-[#d9cbbd] bg-[#120e0d]">
+                        {fitImportRows.slice(0, 10).map((p, idx) => (
+                          <tr key={idx} className="hover:bg-[#1a1310]">
+                            <td className="p-2 font-mono text-[#7d6f66]">{p.codice_prodotto || "—"}</td>
+                            <td className="p-2 font-medium text-[#f5ebd9]">{p.marca}</td>
+                            <td className="p-2 font-mono">{p.pezzi_per_confezione} pz</td>
+                            <td className="p-2 font-mono text-emerald-400">
+                              {p.prezzo_confezione ? `€ ${p.prezzo_confezione.toFixed(2)}` : "—"}
+                            </td>
+                            <td className="p-2 font-mono text-[#c99757]">
+                              {p.prezzo_singolo ? `€ ${p.prezzo_singolo.toFixed(2)}` : "—"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -1482,6 +1805,31 @@ rest_command:
               ))}
             </div>
           )}
+
+          {/* PULIZIA DATI DI PROVA */}
+          <div className="pt-5 border-t border-[#291f19] space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#140d0c] border border-rose-900/40">
+              <div className="space-y-1">
+                <span className="text-xs font-bold text-rose-400 flex items-center gap-1.5">
+                  <AlertCircle className="w-4 h-4 text-rose-400" />
+                  <span>Pulizia Iniziale / Azzera Dati di Prova</span>
+                </span>
+                <p className="text-[11px] text-[#a3948b] max-w-xl leading-relaxed">
+                  Rimuove tutti i sigari fittizi nell'humidor, lo storico sessioni di fumata e le recensioni di prova. Le tue location, tabaccherie, utenti e impostazioni rimarranno intatte.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleResetTestData}
+                disabled={isResettingTestData}
+                className="px-4 py-2 text-xs font-semibold text-rose-200 bg-rose-950/80 hover:bg-rose-900 border border-rose-700/60 rounded-xl transition-all shadow-sm active:scale-95 disabled:opacity-50 shrink-0 flex items-center justify-center gap-1.5"
+              >
+                <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+                <span>{isResettingTestData ? "Pulizia in corso..." : "Azzera Dati di Prova"}</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -1522,6 +1870,13 @@ rest_command:
                 <span className="text-[#d9aa6b] font-bold block">./cli/sigari scrape</span>
                 <span className="text-[11px] text-[#7d6f66] block font-sans">
                   Interroga il listino ufficiale della Federazione Italiana Tabaccai (FIT) e aggiorna i prezzi di tutti i sigari cubani, toscani ed extra-cubani.
+                </span>
+              </div>
+
+              <div className="p-3 rounded-lg bg-[#0e0a09] border border-[#221814] space-y-1">
+                <span className="text-[#d9aa6b] font-bold block">./cli/sigari reset-test-data</span>
+                <span className="text-[11px] text-[#7d6f66] block font-sans">
+                  Elimina tutti i sigari e le fumate di prova dal database locale, lasciando intatte location, configurazioni e utenti.
                 </span>
               </div>
 

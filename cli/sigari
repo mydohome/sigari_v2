@@ -52,6 +52,7 @@ mostra_help() {
   echo "  restore <file>    Ripristina i dati da un file di backup precedente"
   echo "  update [-y]       Scarica aggiornamenti da Git e ricompila i container"
   echo "  scrape            Esegue il download del listino prezzi FIT/ADM"
+  echo "  reset-test-data   Elimina i dati di prova (humidor, fumate) lasciando intatte le location"
   echo "  logs [servizio]   Mostra i log in streaming (backend, db o entrambi)"
   echo "  help              Mostra questa guida"
   echo
@@ -196,6 +197,24 @@ comando_scrape() {
   fi
 }
 
+comando_reset_test_data() {
+  warn "ATTENZIONE: Questo comando eliminerà tutti i sigari nell'humidor, lo storico fumate, recensioni e wishlist di test."
+  echo "Le tue location, negozi, utenti e configurazioni rimarranno invariate."
+  read -r -p "Sei sicuro di voler azzerare tutti i dati di test? [s/N] " r
+  case "$r" in
+    s|S|si|SI|y|Y|yes) ;;
+    *) log "Operazione annullata."; exit 0 ;;
+  esac
+
+  log "Invio richiesta azzeramento dati di test..."
+  if curl -fsS -X POST "${API_URL}/humidor/reset-test-data" 2>/dev/null; then
+    success "Dati di test eliminati con successo. L'humidor è pulito e pronto per l'uso."
+  else
+    error "Errore durante l'invio della richiesta all'API."
+    exit 1
+  fi
+}
+
 comando_logs() {
   local srv="${1:-}"
   if command -v docker >/dev/null 2>&1; then
@@ -216,6 +235,7 @@ main() {
     restore) comando_restore "${1:-}" ;;
     update) comando_update "${1:-}" ;;
     scrape) comando_scrape ;;
+    reset-test-data|clean-test) comando_reset_test_data ;;
     logs) comando_logs "${1:-}" ;;
     help|--help|-h) mostra_help ;;
     *)

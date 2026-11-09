@@ -36,6 +36,40 @@
     },
     {
       "id": 3,
+      "marca": "Cohiba Siglo II",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 1025,
+      "prezzo_singolo": 41,
+      "codice_prodotto": "20105",
+      "provenienza": "Cuba",
+      "variazione_180gg": 2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Mareva (129 mm × 42)",
+      "lunghezza_mm": 129,
+      "ceppo": 42,
+      "descrizione_breve": "Equilibrio supremo di aromi. Legno chiaro, pepe bianco e crema pasticcera."
+    },
+    {
+      "id": 4,
+      "marca": "Cohiba Siglo IV",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 1475,
+      "prezzo_singolo": 59,
+      "codice_prodotto": "20107",
+      "provenienza": "Cuba",
+      "variazione_180gg": 2.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Corona Gorda (143 mm × 46)",
+      "lunghezza_mm": 143,
+      "ceppo": 46,
+      "descrizione_breve": "Formato nobile corona gorda. Fumo denso, ricco di caffè tostato, miele e fava di cacao."
+    },
+    {
+      "id": 5,
       "marca": "Cohiba Siglo VI",
       "categoria": "Sigari",
       "formato": "Confezione da 10 pezzi",
@@ -52,7 +86,75 @@
       "descrizione_breve": "Maestoso e profondo. Una combustione regale con note di spezie dolci, caffè tostato e miele selvatico."
     },
     {
-      "id": 4,
+      "id": 6,
+      "marca": "Cohiba Medio Siglo",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 1250,
+      "prezzo_singolo": 50,
+      "codice_prodotto": "20109",
+      "provenienza": "Cuba",
+      "variazione_180gg": 2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Medio Siglo (102 mm × 52)",
+      "lunghezza_mm": 102,
+      "ceppo": 52,
+      "descrizione_breve": "Unisce la lunghezza del Siglo I con il ceppo del Siglo VI. Fumata moderna, ricca e intensa in 40 minuti."
+    },
+    {
+      "id": 7,
+      "marca": "Cohiba Pirámides Extra",
+      "categoria": "Sigari",
+      "formato": "Confezione da 10 pezzi",
+      "pezzi_per_confezione": 10,
+      "prezzo_confezione": 1200,
+      "prezzo_singolo": 120,
+      "codice_prodotto": "20110",
+      "provenienza": "Cuba",
+      "variazione_180gg": 6,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Pirámides Extra (160 mm × 54)",
+      "lunghezza_mm": 160,
+      "ceppo": 54,
+      "descrizione_breve": "Linea Clasica formato piramide. Foglie con terza fermentazione in botti di cedro. Complessità inarrivabile."
+    },
+    {
+      "id": 8,
+      "marca": "Cohiba Behike BHK 52",
+      "categoria": "Sigari",
+      "formato": "Confezione da 10 pezzi",
+      "pezzi_per_confezione": 10,
+      "prezzo_confezione": 2100,
+      "prezzo_singolo": 210,
+      "codice_prodotto": "20115",
+      "provenienza": "Cuba",
+      "variazione_180gg": 10,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Laguito No. 4 (119 mm × 52)",
+      "lunghezza_mm": 119,
+      "ceppo": 52,
+      "descrizione_breve": "Il vertice assoluto mondiale. Contiene la rarissima foglia 'medio tiempo'. Fumo vellutato e infinita persistenza."
+    },
+    {
+      "id": 9,
+      "marca": "Cohiba Short",
+      "categoria": "Sigaretti",
+      "formato": "Confezione da 10 pezzi",
+      "pezzi_per_confezione": 10,
+      "prezzo_confezione": 22,
+      "prezzo_singolo": 2.2,
+      "codice_prodotto": "20120",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Puritos (82 mm × 26)",
+      "lunghezza_mm": 82,
+      "ceppo": 26,
+      "descrizione_breve": "100% tabacco cubano incartato singolarmente in cellophane. Pausa di 15 minuti dal gusto autentico Cohiba."
+    },
+    {
+      "id": 10,
       "marca": "Montecristo No. 2",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -69,7 +171,7 @@
       "descrizione_breve": "Il figurado più famoso al mondo. Evoluzione magistrale tra legno pregiato, terra bagnata, cioccolato e spezie scure."
     },
     {
-      "id": 5,
+      "id": 11,
       "marca": "Montecristo No. 4",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -86,7 +188,7 @@
       "descrizione_breve": "Il sigaro cubano più venduto nella storia. Tipica nota terrosa Montecristo con caffè, tostato e pepe nero."
     },
     {
-      "id": 6,
+      "id": 12,
       "marca": "Montecristo Edmundo",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -103,7 +205,75 @@
       "descrizione_breve": "Corposo e vellutato. Fumo denso, sentori di terra, chicco di caffè torrefatto e pelle conciata."
     },
     {
-      "id": 7,
+      "id": 13,
+      "marca": "Montecristo Double Edmundo",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 650,
+      "prezzo_singolo": 26,
+      "codice_prodotto": "20212",
+      "provenienza": "Cuba",
+      "variazione_180gg": 1.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Dobles (155 mm × 50)",
+      "lunghezza_mm": 155,
+      "ceppo": 50,
+      "descrizione_breve": "Formato generoso per oltre un'ora di fumata aromatica. Note marcate di cedro, cuoio e spezie dolci."
+    },
+    {
+      "id": 14,
+      "marca": "Montecristo Petit Edmundo",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 437.5,
+      "prezzo_singolo": 17.5,
+      "codice_prodotto": "20214",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Petit Edmundo (110 mm × 52)",
+      "lunghezza_mm": 110,
+      "ceppo": 52,
+      "descrizione_breve": "La quintessenza della linea Edmundo concentrata in 45 minuti. Grasso, speziato e soddisfacente."
+    },
+    {
+      "id": 15,
+      "marca": "Montecristo Open Eagle",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 480,
+      "prezzo_singolo": 24,
+      "codice_prodotto": "20220",
+      "provenienza": "Cuba",
+      "variazione_180gg": 1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Geniales (150 mm × 54)",
+      "lunghezza_mm": 150,
+      "ceppo": 54,
+      "descrizione_breve": "La linea Open concepita per gli amanti della vita all'aria aperta. Fumo fresco, legno, erbe campestri e vaniglia."
+    },
+    {
+      "id": 16,
+      "marca": "Montecristo Linea 1935 Leyenda",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 960,
+      "prezzo_singolo": 48,
+      "codice_prodotto": "20230",
+      "provenienza": "Cuba",
+      "variazione_180gg": 3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Maravillas No. 2 (165 mm × 55)",
+      "lunghezza_mm": 165,
+      "ceppo": 55,
+      "descrizione_breve": "La serie più prestigiosa Montecristo. Forza piena, tre anillas eleganti, aroma regale di torrefazione e spezie nobili."
+    },
+    {
+      "id": 17,
       "marca": "Partagás Serie D No. 4",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -120,7 +290,7 @@
       "descrizione_breve": "Potente, terroso e vibrante. Carattere puro Partagás con accenti di pepe rosso, cuoio forte e terra rossa."
     },
     {
-      "id": 8,
+      "id": 18,
       "marca": "Partagás Serie P No. 2",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -137,7 +307,58 @@
       "descrizione_breve": "Figurado di eccezionale struttura. Intenso, speziato, fumo grasso con finale balsamico e minerale."
     },
     {
-      "id": 9,
+      "id": 19,
+      "marca": "Partagás Serie E No. 2",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 625,
+      "prezzo_singolo": 25,
+      "codice_prodotto": "20308",
+      "provenienza": "Cuba",
+      "variazione_180gg": 1.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Duke (140 mm × 54)",
+      "lunghezza_mm": 140,
+      "ceppo": 54,
+      "descrizione_breve": "Ring generoso 54. Fumo corposo, terroso e minerale, impreziosito da sentori di cioccolato fondente e caffè amaro."
+    },
+    {
+      "id": 20,
+      "marca": "Partagás Lusitanias",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 825,
+      "prezzo_singolo": 33,
+      "codice_prodotto": "20315",
+      "provenienza": "Cuba",
+      "variazione_180gg": 2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Prominente / Double Corona (194 mm × 49)",
+      "lunghezza_mm": 194,
+      "ceppo": 49,
+      "descrizione_breve": "Il Double Corona leggendario amato da Michael Jordan. Evoluzione straordinaria lungo quasi due ore di fumata."
+    },
+    {
+      "id": 21,
+      "marca": "Partagás Mille Fleurs",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 187.5,
+      "prezzo_singolo": 7.5,
+      "codice_prodotto": "20320",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Petit Corona (129 mm × 42)",
+      "lunghezza_mm": 129,
+      "ceppo": 42,
+      "descrizione_breve": "Un grande classico per il giorno. Forza media, note terrose e legnose con ottimo rapporto qualità/prezzo."
+    },
+    {
+      "id": 22,
       "marca": "Romeo y Julieta Wide Churchill",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -154,7 +375,41 @@
       "descrizione_breve": "Ring generoso per un fumo fresco e profumato. Fiori secchi, cedro, mandorla tostata e dolcezza mielata."
     },
     {
-      "id": 10,
+      "id": 23,
+      "marca": "Romeo y Julieta Short Churchill",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 475,
+      "prezzo_singolo": 19,
+      "codice_prodotto": "20402",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (124 mm × 50)",
+      "lunghezza_mm": 124,
+      "ceppo": 50,
+      "descrizione_breve": "Robusto equilibrato e accessibile. Note floreali, nocciola, vaniglia e fumo fresco mai aggressivo."
+    },
+    {
+      "id": 24,
+      "marca": "Romeo y Julieta Churchills",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 750,
+      "prezzo_singolo": 30,
+      "codice_prodotto": "20403",
+      "provenienza": "Cuba",
+      "variazione_180gg": 1.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Julieta No. 2 (178 mm × 47)",
+      "lunghezza_mm": 178,
+      "ceppo": 47,
+      "descrizione_breve": "La vitola battezzata in onore di Sir Winston Churchill. Complesso, aristocratico con note legnose e fruttate."
+    },
+    {
+      "id": 25,
       "marca": "Romeo y Julieta Mille Fleurs",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -171,7 +426,7 @@
       "descrizione_breve": "Ottimo rapporto qualità-prezzo. Fumo dolce con delicate note floreali, pan brioche e legno chiaro."
     },
     {
-      "id": 11,
+      "id": 26,
       "marca": "Hoyo de Monterrey Epicure No. 2",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -188,7 +443,24 @@
       "descrizione_breve": "La quintessenza dell'eleganza leggera. Cremoso, note di vaniglia, nocciola e legno balsamico."
     },
     {
-      "id": 12,
+      "id": 27,
+      "marca": "Hoyo de Monterrey Epicure Especial",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 525,
+      "prezzo_singolo": 21,
+      "codice_prodotto": "20504",
+      "provenienza": "Cuba",
+      "variazione_180gg": 1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Gordito (141 mm × 50)",
+      "lunghezza_mm": 141,
+      "ceppo": 50,
+      "descrizione_breve": "Seta pura al palato. Note biscottate, mandorla dolce, fieno primaverile e legno di cedro."
+    },
+    {
+      "id": 28,
       "marca": "H. Upmann Magnum 46",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -205,7 +477,41 @@
       "descrizione_breve": "Classico ed equilibrato. Gusto rotondo con biscotto tostato, cacao, fieno ed erbe aromatiche."
     },
     {
-      "id": 13,
+      "id": 29,
+      "marca": "H. Upmann Magnum 54",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 525,
+      "prezzo_singolo": 21,
+      "codice_prodotto": "20605",
+      "provenienza": "Cuba",
+      "variazione_180gg": 1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Magnum 54 (120 mm × 54)",
+      "lunghezza_mm": 120,
+      "ceppo": 54,
+      "descrizione_breve": "Formato contemporaneo con calibro 54. Fumo abbondante e morbido, ricco di sentori tostati e mandorlati."
+    },
+    {
+      "id": 30,
+      "marca": "H. Upmann Half Corona",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 187.5,
+      "prezzo_singolo": 7.5,
+      "codice_prodotto": "20608",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Half Corona (90 mm × 44)",
+      "lunghezza_mm": 90,
+      "ceppo": 44,
+      "descrizione_breve": "Il sigaro per pause veloci più amato in Italia. Fumo corposo e tostato in soli 30 minuti."
+    },
+    {
+      "id": 31,
       "marca": "Trinidad Vigia",
       "categoria": "Sigari",
       "formato": "Confezione da 12 pezzi",
@@ -222,7 +528,24 @@
       "descrizione_breve": "Capa setosa con iconico codino pigtail. Aromatico, raffinato, sentori di caffè e legno di noce."
     },
     {
-      "id": 14,
+      "id": 32,
+      "marca": "Trinidad Reyes",
+      "categoria": "Sigari",
+      "formato": "Confezione da 12 pezzi",
+      "pezzi_per_confezione": 12,
+      "prezzo_confezione": 360,
+      "prezzo_singolo": 30,
+      "codice_prodotto": "20706",
+      "provenienza": "Cuba",
+      "variazione_180gg": 2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Reyes (110 mm × 40)",
+      "lunghezza_mm": 110,
+      "ceppo": 40,
+      "descrizione_breve": "Raffinatezza aristocratica. Tè nero, legni nobili e spezie dolci in un formato minuto ed elegante."
+    },
+    {
+      "id": 33,
       "marca": "Bolívar Belicoso Fino",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -239,7 +562,58 @@
       "descrizione_breve": "Forza piena e decisa. Sentori minerali, terra scura, spezie pungenti e cioccolato fondente 85%."
     },
     {
-      "id": 15,
+      "id": 34,
+      "marca": "Bolívar Royal Coronas",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 450,
+      "prezzo_singolo": 18,
+      "codice_prodotto": "20804",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (124 mm × 50)",
+      "lunghezza_mm": 124,
+      "ceppo": 50,
+      "descrizione_breve": "Vincitore Cigar of the Year in passato. Potenza controllata, note terrose e speziate intense."
+    },
+    {
+      "id": 35,
+      "marca": "Ramón Allones Specially Selected",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 450,
+      "prezzo_singolo": 18,
+      "codice_prodotto": "20810",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.9,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (124 mm × 50)",
+      "lunghezza_mm": 124,
+      "ceppo": 50,
+      "descrizione_breve": "Uno dei robusti più complessi di Cuba. Frutta secca tostata, marzapane, cuoio e spezie dolci."
+    },
+    {
+      "id": 36,
+      "marca": "Quintero Favoritos",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 125,
+      "prezzo_singolo": 5,
+      "codice_prodotto": "20910",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Conchas No. 2 (115 mm × 50)",
+      "lunghezza_mm": 115,
+      "ceppo": 50,
+      "descrizione_breve": "Tripa corta cubana fatto a mano. Il robusto più economico e genuino dell'isola caraibica."
+    },
+    {
+      "id": 37,
       "marca": "José L. Piedra Conservas",
       "categoria": "Sigari",
       "formato": "Confezione da 5 pezzi",
@@ -253,10 +627,61 @@
       "vitola": "Conservas (140 mm × 44)",
       "lunghezza_mm": 140,
       "ceppo": 44,
-      "descrizione_breve": "Tripa corta cubana tradizionale. Rustico, onesto e schietto, perfetto per la fumata quotidiana senza pretese."
+      "descrizione_breve": "Tripa corta cubana tradizionale. Rustico, onesto e schietto per la fumata quotidiana senza compromessi."
     },
     {
-      "id": 16,
+      "id": 38,
+      "marca": "José L. Piedra Petit Cazadores",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 13.5,
+      "prezzo_singolo": 2.7,
+      "codice_prodotto": "20904",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Petit Cazadores (105 mm × 43)",
+      "lunghezza_mm": 105,
+      "ceppo": 43,
+      "descrizione_breve": "Piccolo formato accessibile, tabacco della regione di Remedios. Legno, terra e tostato."
+    },
+    {
+      "id": 39,
+      "marca": "Vegueros Entretiempos",
+      "categoria": "Sigari",
+      "formato": "Latta da 16 pezzi",
+      "pezzi_per_confezione": 16,
+      "prezzo_confezione": 128,
+      "prezzo_singolo": 8,
+      "codice_prodotto": "20920",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Petit Edmundo (110 mm × 52)",
+      "lunghezza_mm": 110,
+      "ceppo": 52,
+      "descrizione_breve": "Confezionato nelle tipiche latte metalliche. Gusto erbaceo, terra fresca e legna tostata di Pinar del Río."
+    },
+    {
+      "id": 40,
+      "marca": "Cuaba Tradicionales",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 325,
+      "prezzo_singolo": 13,
+      "codice_prodotto": "20930",
+      "provenienza": "Cuba",
+      "variazione_180gg": 0.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Favoritos (120 mm × 42)",
+      "lunghezza_mm": 120,
+      "ceppo": 42,
+      "descrizione_breve": "Doppio figurado arrotolato secondo la tradizione del XIX secolo. Evoluzione gustativa dal sottile al largo."
+    },
+    {
+      "id": 41,
       "marca": "Toscano Classico",
       "categoria": "Sigari",
       "formato": "Confezione da 5 pezzi",
@@ -273,7 +698,7 @@
       "descrizione_breve": "Il capostipite del fumo lento italiano. 100% Kentucky fermentato con note affumicate di legna da ardere e tostatura."
     },
     {
-      "id": 17,
+      "id": 42,
       "marca": "Toscano Antico",
       "categoria": "Sigari",
       "formato": "Confezione da 5 pezzi",
@@ -290,7 +715,24 @@
       "descrizione_breve": "Carattere vigoroso. Kentucky selezionato e stagionato per oltre 12 mesi. Note di cuoio, legna di quercia e pepe nero."
     },
     {
-      "id": 18,
+      "id": 43,
+      "marca": "Toscano Extra Vecchio",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 8,
+      "prezzo_singolo": 1.6,
+      "codice_prodotto": "10104",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico (158 mm)",
+      "lunghezza_mm": 158,
+      "ceppo": 37,
+      "descrizione_breve": "Nato nel 1953 per celebrare la tradizione toscana. Equilibrato, corposo, con note di legno aromatico e frutta secca."
+    },
+    {
+      "id": 44,
       "marca": "Toscano Garibaldi",
       "categoria": "Sigari",
       "formato": "Confezione da 5 pezzi",
@@ -307,7 +749,7 @@
       "descrizione_breve": "Kentucky più dolce e amabile, ideato dal maestro Mario Soldati. Aromi tostati gentili con sentori di erbe essiccate."
     },
     {
-      "id": 19,
+      "id": 45,
       "marca": "Toscano Originale",
       "categoria": "Sigari",
       "formato": "Confezione da 2 pezzi",
@@ -324,7 +766,24 @@
       "descrizione_breve": "Arrotolato interamente a mano dalle maestre fumatrici di Lucca. Forza nobile, fumo corposo e retrogusto tostato."
     },
     {
-      "id": 20,
+      "id": 46,
+      "marca": "Toscano Originale Selected",
+      "categoria": "Sigari",
+      "formato": "Confezione da 2 pezzi",
+      "pezzi_per_confezione": 2,
+      "prezzo_confezione": 8.8,
+      "prezzo_singolo": 4.4,
+      "codice_prodotto": "10107",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico fatto a mano (165 mm)",
+      "lunghezza_mm": 165,
+      "ceppo": 39,
+      "descrizione_breve": "Selezione rigorosa dei migliori esemplari fatti a mano. Stagionatura prolungata che regala morbidezza e persistenza."
+    },
+    {
+      "id": 47,
       "marca": "Toscano Antica Riserva",
       "categoria": "Sigari",
       "formato": "Confezione da 2 pezzi",
@@ -341,24 +800,92 @@
       "descrizione_breve": "Lunga stagionatura in celle a umidità controllata. Morbido, equilibrato, con profumi di frutta secca e affumicato nobile."
     },
     {
-      "id": 21,
-      "marca": "Toscanello Speciale",
+      "id": 48,
+      "marca": "Toscano Stil Novo",
+      "categoria": "Sigari",
+      "formato": "Confezione da 3 pezzi",
+      "pezzi_per_confezione": 3,
+      "prezzo_confezione": 18,
+      "prezzo_singolo": 6,
+      "codice_prodotto": "10108",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico Fatto a Mano (170 mm)",
+      "lunghezza_mm": 170,
+      "ceppo": 40,
+      "descrizione_breve": "Innovativa fascia di Kentucky italiano con sottofascia e ripieno nobile. Fumata moderna ed elegante."
+    },
+    {
+      "id": 49,
+      "marca": "Toscano Soldati",
       "categoria": "Sigari",
       "formato": "Confezione da 5 pezzi",
       "pezzi_per_confezione": 5,
-      "prezzo_confezione": 4.8,
-      "prezzo_singolo": 0.96,
-      "codice_prodotto": "10110",
+      "prezzo_confezione": 7.5,
+      "prezzo_singolo": 1.5,
+      "codice_prodotto": "10109",
       "provenienza": "Italia",
-      "variazione_180gg": 0.05,
+      "variazione_180gg": 0.1,
       "ultimo_aggiornamento": "2026-09-15",
-      "vitola": "Ammezzato (78 mm)",
-      "lunghezza_mm": 78,
+      "vitola": "Bitroncoconico (155 mm)",
+      "lunghezza_mm": 155,
       "ceppo": 36,
-      "descrizione_breve": "L'ammezzato pronto all'uso. Miscela ricca per pause brevi di 25-30 minuti ad alta intensità aromatica."
+      "descrizione_breve": "Dedicato allo scrittore Mario Soldati. Miscela delicata e aromatica, ottima per iniziare ad apprezzare il Kentucky."
     },
     {
-      "id": 22,
+      "id": 50,
+      "marca": "Toscano Modigliani",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 7.7,
+      "prezzo_singolo": 1.54,
+      "codice_prodotto": "10111",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico (155 mm)",
+      "lunghezza_mm": 155,
+      "ceppo": 36,
+      "descrizione_breve": "Gusto rotondo ed espressivo come le opere dell'artista livornese. Tostatura gentile con mandorla amara."
+    },
+    {
+      "id": 51,
+      "marca": "Toscano Pastrengo",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 8.2,
+      "prezzo_singolo": 1.64,
+      "codice_prodotto": "10112",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.15,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico (160 mm)",
+      "lunghezza_mm": 160,
+      "ceppo": 38,
+      "descrizione_breve": "Kentucky campano e toscano dal temperamento fiero e vigoroso. Sentori di cuoio, legna e pepe nero."
+    },
+    {
+      "id": 52,
+      "marca": "Toscano Duecento",
+      "categoria": "Sigari",
+      "formato": "Confezione da 2 pezzi",
+      "pezzi_per_confezione": 2,
+      "prezzo_confezione": 12,
+      "prezzo_singolo": 6,
+      "codice_prodotto": "10115",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Maxi Bitroncoconico (200 mm)",
+      "lunghezza_mm": 200,
+      "ceppo": 44,
+      "descrizione_breve": "Creato per il bicentenario del sigaro Toscano. Dimensioni impressionanti (20 cm), fumata intensa di oltre 90 minuti."
+    },
+    {
+      "id": 53,
       "marca": "Il Moro (Edizione Limitata)",
       "categoria": "Sigari",
       "formato": "Confezione da 1 pezzo",
@@ -375,7 +902,160 @@
       "descrizione_breve": "Il re indiscusso del tabacco Kentucky italiano. Dimensioni monumentali, affinamento eccezionale in cofanetto di legno."
     },
     {
-      "id": 23,
+      "id": 54,
+      "marca": "Toscanello",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 4.5,
+      "prezzo_singolo": 0.9,
+      "codice_prodotto": "10201",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.05,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Ammezzato (78 mm)",
+      "lunghezza_mm": 78,
+      "ceppo": 36,
+      "descrizione_breve": "L'iconico ammezzato nato negli anni '40. Fumo rapido, schietto e tostato ideale per un dopo caffè."
+    },
+    {
+      "id": 55,
+      "marca": "Toscanello Speciale",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 4.8,
+      "prezzo_singolo": 0.96,
+      "codice_prodotto": "10110",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.05,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Ammezzato (78 mm)",
+      "lunghezza_mm": 78,
+      "ceppo": 36,
+      "descrizione_breve": "L'ammezzato pronto all'uso con Kentucky più stagionato. Intensità aromatica concentrata in 25-30 minuti."
+    },
+    {
+      "id": 56,
+      "marca": "Toscanello Scelto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 4.9,
+      "prezzo_singolo": 0.98,
+      "codice_prodotto": "10203",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.05,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Ammezzato (78 mm)",
+      "lunghezza_mm": 78,
+      "ceppo": 36,
+      "descrizione_breve": "Selezione di tabacchi Kentucky con note morbide e vellutate di legno tostato e cacao."
+    },
+    {
+      "id": 57,
+      "marca": "Toscanello Rosso Caffè",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 5.2,
+      "prezzo_singolo": 1.04,
+      "codice_prodotto": "10205",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.05,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Ammezzato Aromatizzato (78 mm)",
+      "lunghezza_mm": 78,
+      "ceppo": 36,
+      "descrizione_breve": "L'abbinamento italiano per antonomasia: tabacco Kentucky affumicato fuso con note calde di caffè espresso."
+    },
+    {
+      "id": 58,
+      "marca": "Toscanello Bianco Grappa",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 5.2,
+      "prezzo_singolo": 1.04,
+      "codice_prodotto": "10206",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.05,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Ammezzato Aromatizzato (78 mm)",
+      "lunghezza_mm": 78,
+      "ceppo": 36,
+      "descrizione_breve": "Incontro tra Kentucky fermentato e il distillato tradizionale di vinaccia veneta e piemontese."
+    },
+    {
+      "id": 59,
+      "marca": "Tornabuoni Scorciato",
+      "categoria": "Sigari",
+      "formato": "Confezione da 2 pezzi",
+      "pezzi_per_confezione": 2,
+      "prezzo_confezione": 7,
+      "prezzo_singolo": 3.5,
+      "codice_prodotto": "10301",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico Tronco (110 mm)",
+      "lunghezza_mm": 110,
+      "ceppo": 40,
+      "descrizione_breve": "Compagnia Toscana Sigari. Fatto a mano a Sansepolcro, puro Kentucky Valtiberina non degassificato a fuoco naturale."
+    },
+    {
+      "id": 60,
+      "marca": "Tornabuoni Long",
+      "categoria": "Sigari",
+      "formato": "Confezione da 2 pezzi",
+      "pezzi_per_confezione": 2,
+      "prezzo_confezione": 9,
+      "prezzo_singolo": 4.5,
+      "codice_prodotto": "10302",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Bitroncoconico Lungo Fatto a Mano (170 mm)",
+      "lunghezza_mm": 170,
+      "ceppo": 41,
+      "descrizione_breve": "Manifattura artigianale pura. Forza decisa, cenere compatta, profumo avvolgente di fumo di rovere e castagno."
+    },
+    {
+      "id": 61,
+      "marca": "Nostrano del Brenta Il Doge",
+      "categoria": "Sigari",
+      "formato": "Confezione da 3 pezzi",
+      "pezzi_per_confezione": 3,
+      "prezzo_confezione": 13.5,
+      "prezzo_singolo": 4.5,
+      "codice_prodotto": "10401",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto Italiano (120 mm × 46)",
+      "lunghezza_mm": 120,
+      "ceppo": 46,
+      "descrizione_breve": "Consorzio Tabacchicoltori Monte Grappa. Antica semente autoctona Havannensis acclimatata nel Veneto dal 1500. Fumo floreale e soave."
+    },
+    {
+      "id": 62,
+      "marca": "Nostrano del Brenta Il Sestiere",
+      "categoria": "Sigari",
+      "formato": "Confezione da 3 pezzi",
+      "pezzi_per_confezione": 3,
+      "prezzo_confezione": 11.4,
+      "prezzo_singolo": 3.8,
+      "codice_prodotto": "10403",
+      "provenienza": "Italia",
+      "variazione_180gg": 0.15,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Corona Veneta (130 mm × 42)",
+      "lunghezza_mm": 130,
+      "ceppo": 42,
+      "descrizione_breve": "Aroma gentile di erbe della Valbrenta, nocciola fresca e miele millefiori. Una delizia tutta italiana."
+    },
+    {
+      "id": 63,
       "marca": "Davidoff Signature 2000",
       "categoria": "Sigari",
       "formato": "Confezione da 5 pezzi",
@@ -392,7 +1072,58 @@
       "descrizione_breve": "Capa Connecticut Ecuador chiara e vellutata. Gusto raffinato con note di panna, legno di quercia e pepe bianco."
     },
     {
-      "id": 24,
+      "id": 64,
+      "marca": "Davidoff Signature No. 2",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 115,
+      "prezzo_singolo": 23,
+      "codice_prodotto": "30102",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Panetela Lunga con Codino (152 mm × 38)",
+      "lunghezza_mm": 152,
+      "ceppo": 38,
+      "descrizione_breve": "Il sigaro prediletto da Zino Davidoff in persona. Raffinatezza senza tempo, floreale e cremoso."
+    },
+    {
+      "id": 65,
+      "marca": "Davidoff Grand Cru No. 2",
+      "categoria": "Sigari",
+      "formato": "Confezione da 5 pezzi",
+      "pezzi_per_confezione": 5,
+      "prezzo_confezione": 110,
+      "prezzo_singolo": 22,
+      "codice_prodotto": "30103",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.6,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Corona Gorda (142 mm × 43)",
+      "lunghezza_mm": 142,
+      "ceppo": 43,
+      "descrizione_breve": "Ispirato ai grandi vini di Bordeaux. Miscela ricca con legno nobile, nocciole e liquirizia."
+    },
+    {
+      "id": 66,
+      "marca": "Davidoff Winston Churchill The Late Hour Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 4 pezzi",
+      "pezzi_per_confezione": 4,
+      "prezzo_confezione": 112,
+      "prezzo_singolo": 28,
+      "codice_prodotto": "30104",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 1.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (127 mm × 50)",
+      "lunghezza_mm": 127,
+      "ceppo": 50,
+      "descrizione_breve": "Tabacco invecchiato 6 mesi in botti di Scotch Single Malt Speyside. Cuoio, torba, caramello salato e fumo scuro."
+    },
+    {
+      "id": 67,
       "marca": "Davidoff Nicaragua Robusto",
       "categoria": "Sigari",
       "formato": "Confezione da 4 pezzi",
@@ -409,7 +1140,7 @@
       "descrizione_breve": "Tabacchi nicaraguensi vulcanici (Estelí, Condega, Ometepe). Intenso, speziato con cacao fondente e caffè tostato."
     },
     {
-      "id": 25,
+      "id": 68,
       "marca": "Arturo Fuente Opus X Perfecxion X",
       "categoria": "Sigari",
       "formato": "Confezione da 3 pezzi",
@@ -426,7 +1157,41 @@
       "descrizione_breve": "Puro Dominicano di culto. Capa cresciuta all'ombra allo Chateau de la Fuente. Forza piena, note di cannella, cuoio e vaniglia."
     },
     {
-      "id": 26,
+      "id": 69,
+      "marca": "Arturo Fuente Hemingway Short Story",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 300,
+      "prezzo_singolo": 12,
+      "codice_prodotto": "30204",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Perfecto (102 mm × 49)",
+      "lunghezza_mm": 102,
+      "ceppo": 49,
+      "descrizione_breve": "Uno dei figurados più amati al mondo. Capa Cameroon autentica, fumo dolce con note legnose, agrumate e speziate."
+    },
+    {
+      "id": 70,
+      "marca": "Arturo Fuente Don Carlos Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 425,
+      "prezzo_singolo": 17,
+      "codice_prodotto": "30206",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (133 mm × 50)",
+      "lunghezza_mm": 133,
+      "ceppo": 50,
+      "descrizione_breve": "La miscela personale di Don Carlos Fuente Sr. Capa Cameroon invecchiata e ripieno dominicano morbido e profondo."
+    },
+    {
+      "id": 71,
       "marca": "Padrón 1964 Anniversary Principe Maduro",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -443,7 +1208,41 @@
       "descrizione_breve": "Box-pressed impeccabile con tabacco nicaraguense invecchiato 4 anni. Cioccolato nero, espresso denso e spezie tostate."
     },
     {
-      "id": 27,
+      "id": 72,
+      "marca": "Padrón 1964 Anniversary Exclusivo Natural",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 550,
+      "prezzo_singolo": 22,
+      "codice_prodotto": "30303",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto Box-Pressed (140 mm × 50)",
+      "lunghezza_mm": 140,
+      "ceppo": 50,
+      "descrizione_breve": "Uno dei più alti punteggi mai assegnati da Cigar Aficionado. Nocciola, cedro, pepe e fumo vellutato."
+    },
+    {
+      "id": 73,
+      "marca": "Padrón Serie 1926 No. 9",
+      "categoria": "Sigari",
+      "formato": "Confezione da 24 pezzi",
+      "pezzi_per_confezione": 24,
+      "prezzo_confezione": 696,
+      "prezzo_singolo": 29,
+      "codice_prodotto": "30305",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 1.5,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto Box-Pressed (133 mm × 52)",
+      "lunghezza_mm": 133,
+      "ceppo": 52,
+      "descrizione_breve": "Tabacchi invecchiati per 5 interi anni. Forza piena, complessità sensoriale assoluta con terra scura e liquirizia."
+    },
+    {
+      "id": 74,
       "marca": "Oliva Serie V Melanio Robusto",
       "categoria": "Sigari",
       "formato": "Confezione da 10 pezzi",
@@ -460,7 +1259,41 @@
       "descrizione_breve": "Capa Sumatra ecuadoriana con ripieno Jalapa ligero. Fumo morbido, burroso, con sentori di caramello e cedro."
     },
     {
-      "id": 28,
+      "id": 75,
+      "marca": "Oliva Serie V Melanio Figurado",
+      "categoria": "Sigari",
+      "formato": "Confezione da 10 pezzi",
+      "pezzi_per_confezione": 10,
+      "prezzo_confezione": 210,
+      "prezzo_singolo": 21,
+      "codice_prodotto": "30403",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.8,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Double Figurado Box-Pressed (165 mm × 52)",
+      "lunghezza_mm": 165,
+      "ceppo": 52,
+      "descrizione_breve": "Cigar of the Year mondiale. Forma a doppio fuso impeccabile, note di pane tostato, cioccolato al latte e spezie calde."
+    },
+    {
+      "id": 76,
+      "marca": "Nub Cameroon 460",
+      "categoria": "Sigari",
+      "formato": "Confezione da 24 pezzi",
+      "pezzi_per_confezione": 24,
+      "prezzo_confezione": 228,
+      "prezzo_singolo": 9.5,
+      "codice_prodotto": "30410",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Gordo Corto (102 mm × 60)",
+      "lunghezza_mm": 102,
+      "ceppo": 60,
+      "descrizione_breve": "Progettato per raggiungere il cosiddetto 'sweet spot' fin dalla prima boccata. Calibro 60 compatto, fumo denso e dolce."
+    },
+    {
+      "id": 77,
       "marca": "Plasencia Alma Fuerte Sixto II",
       "categoria": "Sigari",
       "formato": "Confezione da 10 pezzi",
@@ -477,7 +1310,58 @@
       "descrizione_breve": "Forma esagonale esclusiva. Miscela di tabacchi invecchiati 9 anni: cacao amaro, noce moscata, prugna secca e legno nobile."
     },
     {
-      "id": 29,
+      "id": 78,
+      "marca": "Plasencia Reserva Original Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 10 pezzi",
+      "pezzi_per_confezione": 10,
+      "prezzo_confezione": 120,
+      "prezzo_singolo": 12,
+      "codice_prodotto": "30505",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (120 mm × 52)",
+      "lunghezza_mm": 120,
+      "ceppo": 52,
+      "descrizione_breve": "Il primo sigaro al mondo certificato 100% biologico OCIA. Tabacco coltivato solo con concimi naturali come 500 anni fa."
+    },
+    {
+      "id": 79,
+      "marca": "Drew Estate Liga Privada No. 9 Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 24 pezzi",
+      "pezzi_per_confezione": 24,
+      "prezzo_confezione": 480,
+      "prezzo_singolo": 20,
+      "codice_prodotto": "30510",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 1,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (127 mm × 52)",
+      "lunghezza_mm": 127,
+      "ceppo": 52,
+      "descrizione_breve": "Capa Connecticut Broadleaf scura e oleosa, fermentata per oltre 18 mesi. Volume di fumo spettacolare, terra e caffè nero."
+    },
+    {
+      "id": 80,
+      "marca": "Drew Estate Undercrown Maduro Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 275,
+      "prezzo_singolo": 11,
+      "codice_prodotto": "30512",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.4,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (127 mm × 54)",
+      "lunghezza_mm": 127,
+      "ceppo": 54,
+      "descrizione_breve": "Nato dai maestri torcedores di Estelí. Capa San Andrés messicana, fumo grasso con cacao, tostato e vaniglia."
+    },
+    {
+      "id": 81,
       "marca": "Joya de Nicaragua Antaño 1970 Robusto Grande",
       "categoria": "Sigari",
       "formato": "Confezione da 20 pezzi",
@@ -494,7 +1378,92 @@
       "descrizione_breve": "La prima fabbrica del Nicaragua. Potenza decisa, spezie scure, note terrose e cioccolato amaro."
     },
     {
-      "id": 30,
+      "id": 82,
+      "marca": "Camacho Corojo Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 210,
+      "prezzo_singolo": 10.5,
+      "codice_prodotto": "30620",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (127 mm × 50)",
+      "lunghezza_mm": 127,
+      "ceppo": 50,
+      "descrizione_breve": "Puro Corojo honduregno d'annata. Carattere sfrontato, pepe nero, agrumi tostati e fumo corposo."
+    },
+    {
+      "id": 83,
+      "marca": "Macanudo Inspirado Orange Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 160,
+      "prezzo_singolo": 8,
+      "codice_prodotto": "30630",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.2,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto (127 mm × 50)",
+      "lunghezza_mm": 127,
+      "ceppo": 50,
+      "descrizione_breve": "Capa Olancho San Agustín dell'Honduras. Complesso, speziato ma gentile, note di legno e nocciola tostata."
+    },
+    {
+      "id": 84,
+      "marca": "Rocky Patel Decade Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 240,
+      "prezzo_singolo": 12,
+      "codice_prodotto": "30640",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.4,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto Box-Pressed (127 mm × 50)",
+      "lunghezza_mm": 127,
+      "ceppo": 50,
+      "descrizione_breve": "Creato per celebrare 10 anni di produzione. Box-pressed con capa Sumatra scura, sentori di espresso e cioccolato fondente."
+    },
+    {
+      "id": 85,
+      "marca": "Alec Bradley Prensado Robusto",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 230,
+      "prezzo_singolo": 11.5,
+      "codice_prodotto": "30650",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto Box-Pressed (127 mm × 50)",
+      "lunghezza_mm": 127,
+      "ceppo": 50,
+      "descrizione_breve": "Capa honduregna Trojes e ripieno nicaraguense. Note ricche di cuoio tostato, caffè e spezie calde."
+    },
+    {
+      "id": 86,
+      "marca": "Ashton Classic Corona",
+      "categoria": "Sigari",
+      "formato": "Confezione da 25 pezzi",
+      "pezzi_per_confezione": 25,
+      "prezzo_confezione": 275,
+      "prezzo_singolo": 11,
+      "codice_prodotto": "30660",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0.3,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Corona (140 mm × 44)",
+      "lunghezza_mm": 140,
+      "ceppo": 44,
+      "descrizione_breve": "Arrotolato a mano da Chateau de la Fuente per Ashton. Capa Connecticut chiara, vellutato con crema e mandorle."
+    },
+    {
+      "id": 87,
       "marca": "VegaFina Nicaragua Robusto",
       "categoria": "Sigari",
       "formato": "Confezione da 25 pezzi",
@@ -509,6 +1478,23 @@
       "lunghezza_mm": 127,
       "ceppo": 50,
       "descrizione_breve": "Ottimo equilibrio e accessibilità. Aromi legnosi, nocciola e spezie dolci con combustione impeccabile."
+    },
+    {
+      "id": 88,
+      "marca": "Flor de Copan Rothschild",
+      "categoria": "Sigari",
+      "formato": "Confezione da 20 pezzi",
+      "pezzi_per_confezione": 20,
+      "prezzo_confezione": 140,
+      "prezzo_singolo": 7,
+      "codice_prodotto": "30710",
+      "provenienza": "Extra-Cuba",
+      "variazione_180gg": 0,
+      "ultimo_aggiornamento": "2026-09-15",
+      "vitola": "Robusto Corto (120 mm × 50)",
+      "lunghezza_mm": 120,
+      "ceppo": 50,
+      "descrizione_breve": "Avvolto in una lamina di vero cedro. Morbido e aromatico con note tostate di legno pregiato e fava di cacao."
     }
   ],
   "price_histories": {
@@ -517,129 +1503,129 @@
         "valido_dal": "2023-01-15",
         "prezzo_confezione": 1500,
         "prezzo_singolo": 60,
-        "fonte_documento": "FIT Tariffa 20230115"
+        "fonte_documento": "Tariffa FIT 20230115"
       },
       {
         "valido_dal": "2024-03-20",
         "prezzo_confezione": 1650,
         "prezzo_singolo": 66,
-        "fonte_documento": "FIT Tariffa 20240320"
+        "fonte_documento": "Tariffa FIT 20240320"
       },
       {
         "valido_dal": "2025-02-10",
         "prezzo_confezione": 1787.5,
         "prezzo_singolo": 71.5,
-        "fonte_documento": "FIT Tariffa 20250210"
+        "fonte_documento": "Tariffa FIT 20250210"
       },
       {
         "valido_dal": "2026-09-15",
         "prezzo_confezione": 1875,
         "prezzo_singolo": 75,
-        "fonte_documento": "FIT Tariffa 20260915"
+        "fonte_documento": "Tariffa FIT 20260915"
       }
     ],
-    "4": [
+    "10": [
       {
         "valido_dal": "2023-02-01",
         "prezzo_confezione": 525,
         "prezzo_singolo": 21,
-        "fonte_documento": "FIT Tariffa 20230201"
+        "fonte_documento": "Tariffa FIT 20230201"
       },
       {
         "valido_dal": "2024-05-12",
         "prezzo_confezione": 575,
         "prezzo_singolo": 23,
-        "fonte_documento": "FIT Tariffa 20240512"
+        "fonte_documento": "Tariffa FIT 20240512"
       },
       {
         "valido_dal": "2025-06-18",
         "prezzo_confezione": 600,
         "prezzo_singolo": 24,
-        "fonte_documento": "FIT Tariffa 20250618"
+        "fonte_documento": "Tariffa FIT 20250618"
       },
       {
         "valido_dal": "2026-09-15",
         "prezzo_confezione": 625,
         "prezzo_singolo": 25,
-        "fonte_documento": "FIT Tariffa 20260915"
-      }
-    ],
-    "7": [
-      {
-        "valido_dal": "2023-01-15",
-        "prezzo_confezione": 400,
-        "prezzo_singolo": 16,
-        "fonte_documento": "FIT Tariffa 20230115"
-      },
-      {
-        "valido_dal": "2024-04-01",
-        "prezzo_confezione": 437.5,
-        "prezzo_singolo": 17.5,
-        "fonte_documento": "FIT Tariffa 20240401"
-      },
-      {
-        "valido_dal": "2025-03-15",
-        "prezzo_confezione": 455,
-        "prezzo_singolo": 18.2,
-        "fonte_documento": "FIT Tariffa 20250315"
-      },
-      {
-        "valido_dal": "2026-09-15",
-        "prezzo_confezione": 475,
-        "prezzo_singolo": 19,
-        "fonte_documento": "FIT Tariffa 20260915"
-      }
-    ],
-    "16": [
-      {
-        "valido_dal": "2023-01-15",
-        "prezzo_confezione": 6.5,
-        "prezzo_singolo": 1.3,
-        "fonte_documento": "FIT Tariffa 20230115"
-      },
-      {
-        "valido_dal": "2024-02-01",
-        "prezzo_confezione": 6.8,
-        "prezzo_singolo": 1.36,
-        "fonte_documento": "FIT Tariffa 20240201"
-      },
-      {
-        "valido_dal": "2025-04-10",
-        "prezzo_confezione": 7,
-        "prezzo_singolo": 1.4,
-        "fonte_documento": "FIT Tariffa 20250410"
-      },
-      {
-        "valido_dal": "2026-09-15",
-        "prezzo_confezione": 7.2,
-        "prezzo_singolo": 1.44,
-        "fonte_documento": "FIT Tariffa 20260915"
+        "fonte_documento": "Tariffa FIT 20260915"
       }
     ],
     "17": [
       {
         "valido_dal": "2023-01-15",
+        "prezzo_confezione": 400,
+        "prezzo_singolo": 16,
+        "fonte_documento": "Tariffa FIT 20230115"
+      },
+      {
+        "valido_dal": "2024-04-01",
+        "prezzo_confezione": 437.5,
+        "prezzo_singolo": 17.5,
+        "fonte_documento": "Tariffa FIT 20240401"
+      },
+      {
+        "valido_dal": "2025-03-15",
+        "prezzo_confezione": 455,
+        "prezzo_singolo": 18.2,
+        "fonte_documento": "Tariffa FIT 20250315"
+      },
+      {
+        "valido_dal": "2026-09-15",
+        "prezzo_confezione": 475,
+        "prezzo_singolo": 19,
+        "fonte_documento": "Tariffa FIT 20260915"
+      }
+    ],
+    "41": [
+      {
+        "valido_dal": "2023-01-15",
+        "prezzo_confezione": 6.5,
+        "prezzo_singolo": 1.3,
+        "fonte_documento": "Tariffa FIT 20230115"
+      },
+      {
+        "valido_dal": "2024-02-01",
+        "prezzo_confezione": 6.8,
+        "prezzo_singolo": 1.36,
+        "fonte_documento": "Tariffa FIT 20240201"
+      },
+      {
+        "valido_dal": "2025-04-10",
+        "prezzo_confezione": 7,
+        "prezzo_singolo": 1.4,
+        "fonte_documento": "Tariffa FIT 20250410"
+      },
+      {
+        "valido_dal": "2026-09-15",
+        "prezzo_confezione": 7.2,
+        "prezzo_singolo": 1.44,
+        "fonte_documento": "Tariffa FIT 20260915"
+      }
+    ],
+    "42": [
+      {
+        "valido_dal": "2023-01-15",
         "prezzo_confezione": 7.7,
         "prezzo_singolo": 1.54,
-        "fonte_documento": "FIT Tariffa 20230115"
+        "fonte_documento": "Tariffa FIT 20230115"
       },
       {
         "valido_dal": "2024-06-01",
         "prezzo_confezione": 8,
         "prezzo_singolo": 1.6,
-        "fonte_documento": "FIT Tariffa 20240601"
+        "fonte_documento": "Tariffa FIT 20240601"
       },
       {
         "valido_dal": "2025-05-15",
         "prezzo_confezione": 8.3,
         "prezzo_singolo": 1.66,
-        "fonte_documento": "FIT Tariffa 20250515"
+        "fonte_documento": "Tariffa FIT 20250515"
       },
       {
         "valido_dal": "2026-09-15",
         "prezzo_confezione": 8.5,
         "prezzo_singolo": 1.7,
-        "fonte_documento": "FIT Tariffa 20260915"
+        "fonte_documento": "Tariffa FIT 20260915"
       }
     ]
   },
@@ -695,275 +1681,12 @@
       "lon": 9.19
     }
   ],
-  "items": [
-    {
-      "id": 6,
-      "product_id": 7,
-      "location_id": 1,
-      "shop_id": null,
-      "prezzo_acquisto": 14.5,
-      "data_acquisto": "2026-11-08",
-      "quantita_iniziale": 2,
-      "quantita_rimanente": 2,
-      "note": null,
-      "created_at": "2026-11-08T19:47:28.121Z"
-    },
-    {
-      "id": 1,
-      "product_id": 1,
-      "shop_id": 1,
-      "shop_nome": "Tabaccheria del Corso - Habanos Specialist",
-      "location_id": 1,
-      "location_nome": "Humidor Principale (Cedro)",
-      "location_colore": "#8b5e34",
-      "prezzo_acquisto": 75,
-      "data_acquisto": "2026-08-10",
-      "quantita_iniziale": 5,
-      "quantita_rimanente": 3,
-      "note": "Scatola sigillata con timbro fábrica El Laguito, conservati a 69% UR.",
-      "created_at": "2026-08-10T14:30:00.000Z"
-    },
-    {
-      "id": 2,
-      "product_id": 4,
-      "shop_id": 1,
-      "shop_nome": "Tabaccheria del Corso - Habanos Specialist",
-      "location_id": 1,
-      "location_nome": "Humidor Principale (Cedro)",
-      "location_colore": "#8b5e34",
-      "prezzo_acquisto": 25,
-      "data_acquisto": "2026-07-15",
-      "quantita_iniziale": 10,
-      "quantita_rimanente": 7,
-      "note": "Piramidi perfette, capa setosa colorado claro.",
-      "created_at": "2026-07-15T11:00:00.000Z"
-    },
-    {
-      "id": 3,
-      "product_id": 17,
-      "shop_id": 2,
-      "shop_nome": "Antica Manifattura Lucchese Shop",
-      "location_id": 2,
-      "location_nome": "Giara Vetro Toscani",
-      "location_colore": "#43a047",
-      "prezzo_acquisto": 8.5,
-      "data_acquisto": "2026-09-01",
-      "quantita_iniziale": 15,
-      "quantita_rimanente": 11,
-      "note": "Stagionati in giara ermetica con Boveda 65%. Fumo denso e legnoso.",
-      "created_at": "2026-09-01T09:20:00.000Z"
-    },
-    {
-      "id": 4,
-      "product_id": 25,
-      "shop_id": 3,
-      "shop_nome": "Cigar Lounge Milano Duomo",
-      "location_id": 3,
-      "location_nome": "Tupperdor Invecchiamento",
-      "location_colore": "#4a90d9",
-      "prezzo_acquisto": 38,
-      "data_acquisto": "2026-05-20",
-      "quantita_iniziale": 4,
-      "quantita_rimanente": 2,
-      "note": "Riservati per festeggiamenti speciali. Affinamento di 6 mesi.",
-      "created_at": "2026-05-20T17:45:00.000Z"
-    },
-    {
-      "id": 5,
-      "product_id": 7,
-      "shop_id": 1,
-      "shop_nome": "Tabaccheria del Corso - Habanos Specialist",
-      "location_id": 1,
-      "location_nome": "Humidor Principale (Cedro)",
-      "location_colore": "#8b5e34",
-      "prezzo_acquisto": 19,
-      "data_acquisto": "2026-08-28",
-      "quantita_iniziale": 6,
-      "quantita_rimanente": 4,
-      "note": "Classico robusto cubano, tiraggio perfetto.",
-      "created_at": "2026-08-28T16:10:00.000Z"
-    }
-  ],
-  "fumate": [
-    {
-      "id": 1,
-      "humidor_item_id": 1,
-      "product_id": 1,
-      "quantita": 1,
-      "data_fumata": "2026-11-06",
-      "ora_inizio": "21:15",
-      "ora_fine": "22:20",
-      "durata_minuti": 65,
-      "riaccensioni": 0,
-      "stelle": 5,
-      "note": "Fumata maestosa. Cenere bianchissima compatta, note di cedro e cacao amaro persistenti per ore.",
-      "abbinamento": "Rum Zacapa XO 23 Anni",
-      "created_at": "2026-11-06T22:25:00.000Z"
-    },
-    {
-      "id": 2,
-      "humidor_item_id": 2,
-      "product_id": 4,
-      "quantita": 1,
-      "data_fumata": "2026-11-03",
-      "ora_inizio": "18:30",
-      "ora_fine": "19:50",
-      "durata_minuti": 80,
-      "riaccensioni": 1,
-      "stelle": 5,
-      "note": "Taglio a V sulla testa piramidale. Evoluzione eccezionale nel secondo terzo con cioccolato fondente e cuoio.",
-      "abbinamento": "Caffè Monorigine Etiopia & Cioccolato 80%",
-      "created_at": "2026-11-03T20:00:00.000Z"
-    },
-    {
-      "id": 3,
-      "humidor_item_id": 3,
-      "product_id": 17,
-      "quantita": 1,
-      "data_fumata": "2026-10-30",
-      "ora_inizio": "17:00",
-      "ora_fine": "18:05",
-      "durata_minuti": 65,
-      "riaccensioni": 0,
-      "stelle": 4,
-      "note": "Fumato intero 'alla maremmana'. Pungente e vigoroso, classica fumosità Kentucky toscano.",
-      "abbinamento": "Grappa barricata di Amarone",
-      "created_at": "2026-10-30T18:10:00.000Z"
-    },
-    {
-      "id": 4,
-      "humidor_item_id": 5,
-      "product_id": 7,
-      "quantita": 1,
-      "data_fumata": "2026-10-24",
-      "ora_inizio": "21:30",
-      "ora_fine": "22:25",
-      "durata_minuti": 55,
-      "riaccensioni": 1,
-      "stelle": 5,
-      "note": "Serie D4 infallibile. Pepe nero iniziale poi morbidezza vellutata terrosa.",
-      "abbinamento": "Lagavulin 16 Islay Single Malt",
-      "created_at": "2026-10-24T22:30:00.000Z"
-    },
-    {
-      "id": 5,
-      "humidor_item_id": 3,
-      "product_id": 17,
-      "quantita": 1,
-      "data_fumata": "2026-10-18",
-      "ora_inizio": "16:45",
-      "ora_fine": "17:40",
-      "durata_minuti": 55,
-      "riaccensioni": 0,
-      "stelle": 4,
-      "note": "Ammezzato in giardino al tramonto. Fumo denso e tostato.",
-      "abbinamento": "Espresso doppio amaro",
-      "created_at": "2026-10-18T17:45:00.000Z"
-    },
-    {
-      "id": 6,
-      "humidor_item_id": 4,
-      "product_id": 25,
-      "quantita": 1,
-      "data_fumata": "2026-10-10",
-      "ora_inizio": "20:00",
-      "ora_fine": "21:25",
-      "durata_minuti": 85,
-      "riaccensioni": 0,
-      "stelle": 5,
-      "note": "Opus X in forma smagliante. Spezie dolci, vaniglia naturale e corpo pieno senza aggressività.",
-      "abbinamento": "Cognac Pierre Ferrand 1840",
-      "created_at": "2026-10-10T21:30:00.000Z"
-    }
-  ],
-  "reviews": {
-    "1": {
-      "id": 1,
-      "product_id": 1,
-      "stelle": 5,
-      "descrizione": "Capolavoro assoluto. Struttura armonica, fumo vellutato con progressione da cedro nobile a fava di cacao e cuoio.",
-      "aromi": [
-        "Cedro",
-        "Cacao",
-        "Cuoio",
-        "Vaniglia"
-      ],
-      "forza": "Medio-forte",
-      "combustione": "Perfetta",
-      "tiraggio": "Ottimale",
-      "abbinamento_consigliato": "Rum millesimato o Porto d'annata",
-      "updated_at": "2026-11-06T22:30:00.000Z"
-    },
-    "4": {
-      "id": 2,
-      "product_id": 4,
-      "stelle": 5,
-      "descrizione": "La forma a piramide regala un bouquet sempre più fitto. Note marcate di terra umida, torrefazione e spezie dolci.",
-      "aromi": [
-        "Terra",
-        "Caffè",
-        "Spezie",
-        "Cioccolato"
-      ],
-      "forza": "Forte",
-      "combustione": "Perfetta",
-      "tiraggio": "Ottimale",
-      "abbinamento_consigliato": "Whisky torbato o caffè espresso estratto a regola d'arte",
-      "updated_at": "2026-11-03T20:10:00.000Z"
-    },
-    "17": {
-      "id": 3,
-      "product_id": 17,
-      "stelle": 4,
-      "descrizione": "Il re del fumo rustico toscano. Forza decisa, affumicatura a legna naturale e persistenza gustativa eccezionale.",
-      "aromi": [
-        "Legno affumicato",
-        "Cuoio",
-        "Pepe",
-        "Erbe aromatiche"
-      ],
-      "forza": "Forte",
-      "combustione": "Buona",
-      "tiraggio": "Ottimale",
-      "abbinamento_consigliato": "Vino Chianti Classico Riserva o Grappa di Brunello",
-      "updated_at": "2026-10-30T18:20:00.000Z"
-    }
-  },
-  "favorites": [
-    {
-      "id": 1,
-      "product_id": 1,
-      "tag": "Occasioni Speciali",
-      "created_at": "2026-08-10T14:35:00.000Z"
-    },
-    {
-      "id": 2,
-      "product_id": 4,
-      "tag": "Top Classico",
-      "created_at": "2026-07-15T11:15:00.000Z"
-    },
-    {
-      "id": 3,
-      "product_id": 17,
-      "tag": "Quotidiano",
-      "created_at": "2026-09-01T09:30:00.000Z"
-    }
-  ],
-  "wishlist": [
-    {
-      "id": 1,
-      "product_id": 3,
-      "quantita": 2,
-      "created_at": "2026-11-01T10:00:00.000Z"
-    },
-    {
-      "id": 2,
-      "product_id": 22,
-      "quantita": 1,
-      "created_at": "2026-11-02T15:20:00.000Z"
-    }
-  ],
-  "last_scrape": "2026-11-08T13:47:06.666Z",
+  "items": [],
+  "fumate": [],
+  "reviews": {},
+  "favorites": [],
+  "wishlist": [],
+  "last_scrape": "2026-11-08T20:41:04.771Z",
   "config": {
     "ha_api_key": "fakehakey123",
     "admin_token": "faketoken123"
